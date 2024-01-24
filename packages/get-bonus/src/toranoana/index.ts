@@ -11,7 +11,7 @@ export class Toranoana extends Provider {
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
-    const html: string = await ofetch(this.baseUrl + '/tora/ec/app/catalog/list', {
+    const html = await ofetch(this.baseUrl + '/tora/ec/app/catalog/list', {
       query: {
         searchWord: text,
         stock_status: '○,△'
@@ -34,7 +34,7 @@ export class Toranoana extends Provider {
   }
 
   async detail(url: string): Promise<Detail | undefined> {
-    const html: string = await ofetch(url);
+    const html = await ofetch(url);
     const dom = new JSDOM(html);
     const doc = dom.window.document;
 

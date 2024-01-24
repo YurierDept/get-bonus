@@ -11,7 +11,7 @@ export class Melonbooks extends Provider {
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
-    const html: string = await ofetch(this.baseUrl + '/search/search.php', {
+    const html = await ofetch(this.baseUrl + '/search/search.php', {
       query: {
         name: text,
         'additional[]': 'pr',
@@ -35,7 +35,7 @@ export class Melonbooks extends Provider {
   }
 
   async detail(url: string): Promise<Detail | undefined> {
-    const html: string = await ofetch(url);
+    const html = await ofetch(url);
     const dom = new JSDOM(html);
     const doc = dom.window.document;
 
