@@ -1,4 +1,4 @@
-import type { Detail, SearchResult } from '../types';
+import type { Detail, SearchResult, SearchOptions } from '../types';
 
 import { Provider } from '../scraper';
 
@@ -7,7 +7,7 @@ export class Animate extends Provider {
     super('animate');
   }
 
-  async search(text: string): Promise<SearchResult[]> {
+  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
     return [];
   }
 
