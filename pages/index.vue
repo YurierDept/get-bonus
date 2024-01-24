@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 const searchInput = ref('');
 const search = async () => {
   if (!searchInput.value) return;
-  console.log(searchInput.value);
-  const resp = await $fetch('/api/search/', {});
+  const resp = await $fetch(`/api/search/${searchInput.value}`, {});
   console.log(resp);
 };
 </script>
