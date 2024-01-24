@@ -2,8 +2,11 @@ import { fileURLToPath } from 'node:url';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@unocss/nuxt'],
   devtools: { enabled: true },
+  modules: ['@unocss/nuxt', 'shadcn-nuxt'],
+  alias: {
+    'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))
+  },
   css: ['@unocss/reset/tailwind.css'],
   app: {
     head: {
@@ -19,7 +22,8 @@ export default defineNuxtConfig({
   unocss: {
     preflight: true
   },
-  alias: {
-    'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui'
   }
 });
