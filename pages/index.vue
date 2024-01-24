@@ -35,7 +35,7 @@ const search = async () => {
         <span>搜索</span>
       </Button>
     </div>
-    <div class="w-full mt-6 pb-6">
+    <div class="w-full mt-6 pb-16">
       <SearchResult v-if="results" :results="results"></SearchResult>
       <div v-else-if="isSearching" class="w-full">
         <Skeleton class="h-60 w-full"></Skeleton>

@@ -9,10 +9,14 @@ defineProps<{ results: Detail[] }>();
 <template>
   <ul class="grid gap-4">
     <li v-for="{ provider, title, url, items } in results" class="p-4 b-1 rounded-4">
-      <nuxt-link class="font-bold text-5 hover:color-blue" :to="url" target="_blank">
-        <span>{{ title }}</span>
-        <Badge variant="outline">{{ provider }}</Badge>
-      </nuxt-link>
+      <span class="flex items-center gap-2">
+        <nuxt-link class="font-bold text-5 hover:color-blue" :to="url" target="_blank">
+          <span>{{ title }}</span>
+        </nuxt-link>
+        <a href="" target="_blank">
+          <Badge variant="outline">{{ provider }}</Badge>
+        </a>
+      </span>
       <ul>
         <li v-for="{ image, description } in items" class="flex gap-4 mt-4">
           <img class="max-w-36" :src="image" />
