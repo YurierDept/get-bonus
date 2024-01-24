@@ -12,11 +12,14 @@ const results = ref<Detail[]>();
 const searchInput = ref('');
 const isSearching = ref(false);
 const search = async () => {
+  if (isSearching.value) return;
   if (!searchInput.value) return;
   try {
     isSearching.value = true;
     const resp = await $fetch(`/api/search/${searchInput.value}`, {});
     results.value = resp.result.filter(Boolean);
+  } catch {
+    results.value = [];
   } finally {
     isSearching.value = false;
   }
@@ -36,9 +39,10 @@ const search = async () => {
       </Button>
     </div>
     <div class="w-full mt-6 pb-16">
-      <SearchResult v-if="results" :results="results"></SearchResult>
-      <div v-else-if="isSearching" class="w-full">
-        <Skeleton class="h-60 w-full"></Skeleton>
+      <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
+      <SearchResult v-else-if="results && results.length > 0" :results="results"></SearchResult>
+      <div v-else-if="results && results.length === 0" class="flex items-center justify-center">
+        <span class="text-2xl font-bold">未找到商品</span>
       </div>
     </div>
   </div>
