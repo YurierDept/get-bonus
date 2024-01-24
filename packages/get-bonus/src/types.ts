@@ -20,5 +20,13 @@ export interface Detail {
 
   url: string;
 
+  items: DetailItem[];
+
   // TODO
+}
+
+export interface DetailItem {
+  image: string;
+
+  description: string;
 }

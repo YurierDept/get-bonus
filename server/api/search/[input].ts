@@ -8,10 +8,11 @@ export default defineEventHandler(async (event) => {
     throw new Error(`Input is not given`);
   }
 
-  const result = await scraper.search(input);
+  const searchResult = await scraper.search(input);
+  const details = await scraper.getAllDetails(Object.values(searchResult).flat(1));
 
   return {
     input,
-    result
+    result: details
   };
 });
