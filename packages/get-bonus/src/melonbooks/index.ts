@@ -14,7 +14,9 @@ export class Melonbooks extends Provider {
     const html: string = await ofetch(this.baseUrl + '/search/search.php', {
       query: {
         name: text,
-        'additional[]': 'pr'
+        'additional[]': 'pr',
+        'category_ids[]': '4', // コミック
+        'child_category_ids[]': ['12', '43'] // コミック 和 ノベル
       }
     });
 
@@ -26,7 +28,7 @@ export class Melonbooks extends Provider {
       const a = item.querySelector('.item-image > a') as HTMLAnchorElement;
       return {
         provider: this.id,
-        title: a.title,
+        title: a.title.trim(),
         url: this.baseUrl + a.href
       };
     });
@@ -37,7 +39,7 @@ export class Melonbooks extends Provider {
     const dom = new JSDOM(html);
     const doc = dom.window.document;
 
-    const title = doc.querySelector('.page-header')?.textContent || '';
+    const title = doc.querySelector('.page-header')?.textContent?.trim() || '';
     const privItems = doc.querySelectorAll('.priv-item');
     const items = [...privItems].map((item) => {
       const img = item.querySelector('.priv_img') as HTMLImageElement;

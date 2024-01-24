@@ -14,8 +14,8 @@ export class Toranoana extends Provider {
     const html: string = await ofetch(this.baseUrl + '/tora/ec/app/catalog/list', {
       query: {
         searchWord: text,
-        stock_status: '○,△',
-        commodity_kind_name: '特典'
+        stock_status: '○,△'
+        // commodity_kind_name: '特典'
       }
     });
 
