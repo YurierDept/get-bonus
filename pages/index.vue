@@ -23,11 +23,11 @@ const search = async () => {
     </div>
     <ul class="grid gap-4 mt-6">
       <li v-for="{ title, url, items } in results" class="p-4 b-1 rounded-4">
-        <nuxt-link class="font-bold hover:color-blue" :to="url" target="_blank">{{ title }}</nuxt-link>
+        <nuxt-link class="font-bold text-5 hover:color-blue" :to="url" target="_blank">{{ title }}</nuxt-link>
         <ul>
-          <li v-for="{ image, description } in items" class="flex gap-2 mt-2">
+          <li v-for="{ image, description } in items" class="flex gap-4 mt-4">
             <img class="max-w-36" :src="image"/>
-            <p>{{ description }}</p>
+            <p class="text-3.5 result-description">{{ description }}</p>
           </li>
         </ul>
       </li>
@@ -38,5 +38,9 @@ const search = async () => {
 <style>
 .main {
   @apply: mx-auto w-5xl lt-lg:w-3xl lt-md:w-[95vw] lt-md:px-3;
+}
+
+.result-description {
+  white-space: pre-line;
 }
 </style>
