@@ -7,11 +7,11 @@ import { Provider } from '../scraper';
 
 export class Toranoana extends Provider {
   constructor() {
-    super('toranoana');
+    super('toranoana', 'https://ecs.toranoana.jp');
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
-    const html: string = await ofetch('https://ecs.toranoana.jp/tora/ec/app/catalog/list', {
+    const html: string = await ofetch(this.baseUrl + '/tora/ec/app/catalog/list', {
       query: {
         searchWord: text,
         stock_status: '○,△',
@@ -23,15 +23,14 @@ export class Toranoana extends Provider {
     const doc = dom.window.document;
 
     const resultItems = doc.querySelectorAll('.product-list-item');
-    return [...resultItems].reduce((res: SearchResult[], item) => {
+    return [...resultItems].map((item) => {
       const a = item.querySelector('.product-list-title > a') as HTMLAnchorElement;
-      res.push({
+      return {
         provider: this.id,
         title: a.textContent?.trim?.() || '',
-        url: 'https://ecs.toranoana.jp' + a.href
-      });
-      return res;
-    }, []);
+        url: this.baseUrl + a.href
+      };
+    });
   }
 
   async detail(url: string): Promise<Detail | undefined> {

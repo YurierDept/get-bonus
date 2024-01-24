@@ -7,11 +7,11 @@ import { Provider } from '../scraper';
 
 export class Melonbooks extends Provider {
   constructor() {
-    super('melonbooks');
+    super('melonbooks', 'https://www.melonbooks.co.jp');
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
-    const html: string = await ofetch('https://www.melonbooks.co.jp/search/search.php', {
+    const html: string = await ofetch(this.baseUrl + '/search/search.php', {
       query: {
         name: text,
         'additional[]': 'pr'
@@ -22,15 +22,14 @@ export class Melonbooks extends Provider {
     const doc = dom.window.document;
 
     const resultItems = doc.querySelectorAll('.item-list li[class^=product]');
-    return [...resultItems].reduce((res: SearchResult[], item) => {
+    return [...resultItems].map((item) => {
       const a = item.querySelector('.item-image > a') as HTMLAnchorElement;
-      res.push({
+      return {
         provider: this.id,
         title: a.title,
-        url: 'https://www.melonbooks.co.jp' + a.href
-      });
-      return res;
-    }, []);
+        url: this.baseUrl + a.href
+      };
+    });
   }
 
   async detail(url: string): Promise<Detail | undefined> {
@@ -40,15 +39,14 @@ export class Melonbooks extends Provider {
 
     const title = doc.querySelector('.page-header')?.textContent || '';
     const privItems = doc.querySelectorAll('.priv-item');
-    const items = [...privItems].reduce((res: DetailItem[], item) => {
+    const items = [...privItems].map((item) => {
       const img = item.querySelector('.priv_img') as HTMLImageElement;
       const info = item.querySelector('.priv-item_info');
-      res.push({
+      return {
         image: enforceHTTPS(img.src),
         description: info?.textContent?.trim?.() || ''
-      });
-      return res;
-    }, []);
+      };
+    });
 
     return {
       provider: this.id,

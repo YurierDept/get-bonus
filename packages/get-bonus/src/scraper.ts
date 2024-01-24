@@ -56,9 +56,11 @@ export class Scraper {
 
 export abstract class Provider {
   public readonly id: string;
+  public readonly baseUrl: string;
 
-  constructor(name: string) {
+  constructor(name: string, baseUrl: string) {
     this.id = name;
+    this.baseUrl = baseUrl;
   }
 
   abstract search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]>;
