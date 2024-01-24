@@ -1,12 +1,14 @@
 import { scraper } from '../../scraper';
 
-export default defineEventHandler((event) => {
-  const input = getRouterParam(event, 'input');
+export default defineEventHandler(async (event) => {
+  const input = getRouterParam(event, 'input', {
+    decode: true
+  });
   if (!input) {
     throw new Error(`Input is not given`);
   }
 
-  const result = scraper.search(input);
+  const result = await scraper.search(input);
 
   return {
     input,
