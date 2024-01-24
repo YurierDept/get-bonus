@@ -38,6 +38,7 @@
     "node": ">=v20.10.0"
   },
   "dependencies": {
-    "cheerio": "1.0.0-rc.12"
+    "cheerio": "1.0.0-rc.12",
+    "jsdom": "^24.0.0"
   }
 }

@@ -2,9 +2,9 @@ import type { Detail, SearchResult } from '../types';
 
 import { Provider } from '../scraper';
 
-export class Melonbooks extends Provider {
+export class Toranoana extends Provider {
   constructor() {
-    super('melonbooks');
+    super('toranoana');
   }
 
   async search(text: string): Promise<SearchResult[]> {

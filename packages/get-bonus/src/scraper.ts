@@ -33,5 +33,5 @@ export abstract class Provider {
 
   abstract search(text: string): Promise<SearchResult[]>;
 
-  abstract detail(url: string): Promise<Detail>;
+  abstract detail(url: string): Promise<Detail | undefined>;
 }
