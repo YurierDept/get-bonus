@@ -20,15 +20,9 @@ defineProps<{ results: Detail[] }>();
       <ul>
         <li v-for="{ image, description } in items" class="flex gap-4 mt-4">
           <img class="max-w-36" :src="image" />
-          <p class="text-3.5 result-description">{{ description }}</p>
+          <p class="text-3.5 whitespace-pre-line">{{ description }}</p>
         </li>
       </ul>
     </li>
   </ul>
 </template>
-
-<style>
-.result-description {
-  @apply whitespace-pre-line;
-}
-</style>
