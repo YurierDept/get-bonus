@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import type { Detail } from 'get-bonus';
+
 import { Loader2 } from 'lucide-vue-next';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
-const results = ref();
+const results = ref<Detail[]>();
 
 const searchInput = ref('');
 const isSearching = ref(false);
@@ -13,7 +16,7 @@ const search = async () => {
   try {
     isSearching.value = true;
     const resp = await $fetch(`/api/search/${searchInput.value}`, {});
-    results.value = resp.result;
+    results.value = resp.result.filter(Boolean) as Detail[];
   } finally {
     isSearching.value = false;
   }
@@ -32,19 +35,12 @@ const search = async () => {
         <span>搜索</span>
       </Button>
     </div>
-    <ul class="grid gap-4 mt-6">
-      <li v-for="{ title, url, items } in results" class="p-4 b-1 rounded-4">
-        <nuxt-link class="font-bold text-5 hover:color-blue" :to="url" target="_blank">{{
-          title
-        }}</nuxt-link>
-        <ul>
-          <li v-for="{ image, description } in items" class="flex gap-4 mt-4">
-            <img class="max-w-36" :src="image" />
-            <p class="text-3.5 result-description">{{ description }}</p>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <div class="w-full mt-6">
+      <SearchResult v-if="results" :results="results"></SearchResult>
+      <div v-else-if="isSearching" class="w-full">
+        <Skeleton class="h-60 w-full"></Skeleton>
+      </div>
+    </div>
   </div>
 </template>
 

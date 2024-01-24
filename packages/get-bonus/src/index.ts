@@ -11,3 +11,5 @@ export * from './comiczin';
 export * from './gamers';
 
 export * from './toranoana';
+
+export * from './types';
