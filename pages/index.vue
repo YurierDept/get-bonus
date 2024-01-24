@@ -14,7 +14,7 @@ const search = async () => {
     isSearching.value = true;
     const resp = await $fetch(`/api/search/${searchInput.value}`, {});
     results.value = resp.result;
-  } catch {
+  } finally {
     isSearching.value = false;
   }
 };
