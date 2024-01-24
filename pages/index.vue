@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
 
-import { Loader2 } from 'lucide-vue-next';
+import { Loader2, Search } from 'lucide-vue-next';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -35,6 +35,7 @@ const search = async () => {
       <Input v-model="searchInput" @keydown.enter="search"></Input>
       <Button @click="search" :disabled="isSearching">
         <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
+        <Search v-else class="w-4 h-4 mr-2"></Search>
         <span>搜索</span>
       </Button>
     </div>
