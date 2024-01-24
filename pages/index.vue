@@ -35,7 +35,7 @@ if (route.query.q) {
 
 <template>
   <div class="main">
-    <div class="mt-10">
+    <div class="mt-10 select-none">
       <span class="text-4xl font-bold">Get Bonus</span>
     </div>
     <div class="mt-8 flex gap-4">
