@@ -35,7 +35,7 @@ export class Toranoana extends Provider {
   }
 
   async detail(url: string): Promise<Detail | undefined> {
-    const html: string = await $fetch(url);
+    const html: string = await ofetch(url);
     const dom = new JSDOM(html);
     const doc = dom.window.document;
 
