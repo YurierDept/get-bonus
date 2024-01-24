@@ -8,14 +8,25 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const route = useRoute();
+const router = useRouter();
 
-const results = ref<Detail[]>();
+const { data } = await useAsyncData('search_results', async () =>
+  route.query.q ? $fetch(`/api/search/${route.query.q}`) : undefined
+);
+
+const results = ref<Detail[] | null>(data.value?.result ?? null);
 
 const searchInput = ref('');
 const isSearching = ref(false);
 const search = async () => {
   if (isSearching.value) return;
   if (!searchInput.value) return;
+
+  router.push({
+    path: route.path,
+    query: { q: searchInput.value }
+  });
+
   try {
     isSearching.value = true;
     const resp = await $fetch(`/api/search/${searchInput.value}`, {});
@@ -26,11 +37,6 @@ const search = async () => {
     isSearching.value = false;
   }
 };
-
-if (route.query.q) {
-  searchInput.value = route.query.q as string;
-  await search();
-}
 </script>
 
 <template>
