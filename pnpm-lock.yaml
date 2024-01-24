@@ -69,9 +69,6 @@ importers:
       unocss:
         specifier: ^0.58.3
         version: 0.58.3(@unocss/webpack@0.58.3)(postcss@8.4.33)(rollup@3.29.4)(vite@5.0.12)
-      vite:
-        specifier: ^5.0.12
-        version: 5.0.12(@types/node@20.11.6)
       vitest:
         specifier: ^1.2.1
         version: 1.2.1(@types/node@20.11.6)
