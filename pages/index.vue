@@ -48,8 +48,4 @@ const search = async () => {
 .main {
   @apply: mx-auto w-5xl lt-lg:w-3xl lt-md:w-[95vw] lt-md:px-3;
 }
-
-.result-description {
-  white-space: pre-line;
-}
 </style>

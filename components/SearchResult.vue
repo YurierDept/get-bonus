@@ -19,3 +19,9 @@ defineProps<{ results: Detail[] }>();
     </li>
   </ul>
 </template>
+
+<style>
+.result-description {
+  @apply whitespace-pre-line;
+}
+</style>
