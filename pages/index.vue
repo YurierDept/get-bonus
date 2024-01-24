@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
+const route = useRoute();
+
 const results = ref<Detail[]>();
 
 const searchInput = ref('');
@@ -24,6 +26,11 @@ const search = async () => {
     isSearching.value = false;
   }
 };
+
+if (route.query.q) {
+  searchInput.value = route.query.q as string;
+  await search();
+}
 </script>
 
 <template>
