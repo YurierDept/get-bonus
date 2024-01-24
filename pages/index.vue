@@ -1,14 +1,22 @@
 <script setup lang="ts">
+import { Loader2 } from 'lucide-vue-next';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 const results = ref();
 
 const searchInput = ref('');
+const isSearching = ref(false);
 const search = async () => {
   if (!searchInput.value) return;
-  const resp = await $fetch(`/api/search/${searchInput.value}`, {});
-  results.value = resp.result;
+  try {
+    isSearching.value = true;
+    const resp = await $fetch(`/api/search/${searchInput.value}`, {});
+    results.value = resp.result;
+  } catch {
+    isSearching.value = false;
+  }
 };
 </script>
 
@@ -19,14 +27,19 @@ const search = async () => {
     </div>
     <div class="mt-8 flex gap-4">
       <Input v-model="searchInput" @keydown.enter="search"></Input>
-      <Button @click="search">搜索</Button>
+      <Button @click="search" :disabled="isSearching">
+        <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
+        <span>搜索</span>
+      </Button>
     </div>
     <ul class="grid gap-4 mt-6">
       <li v-for="{ title, url, items } in results" class="p-4 b-1 rounded-4">
-        <nuxt-link class="font-bold text-5 hover:color-blue" :to="url" target="_blank">{{ title }}</nuxt-link>
+        <nuxt-link class="font-bold text-5 hover:color-blue" :to="url" target="_blank">{{
+          title
+        }}</nuxt-link>
         <ul>
           <li v-for="{ image, description } in items" class="flex gap-4 mt-4">
-            <img class="max-w-36" :src="image"/>
+            <img class="max-w-36" :src="image" />
             <p class="text-3.5 result-description">{{ description }}</p>
           </li>
         </ul>
