@@ -7,7 +7,7 @@ import { Provider } from '../scraper';
 
 export class Animate extends Provider {
   constructor() {
-    super('animate');
+    super('animate', '');
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {

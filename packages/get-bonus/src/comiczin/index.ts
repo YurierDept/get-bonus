@@ -4,7 +4,7 @@ import { Provider } from '../scraper';
 
 export class Comiczin extends Provider {
   constructor() {
-    super('comiczin');
+    super('comiczin', '');
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {

@@ -4,7 +4,7 @@ import { Provider } from '../scraper';
 
 export class Gamers extends Provider {
   constructor() {
-    super('gamers');
+    super('gamers', '');
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
