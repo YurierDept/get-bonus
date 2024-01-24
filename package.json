@@ -1,9 +1,9 @@
 {
-  "name": "get-bonus",
+  "name": "@get-bonus/monorepo",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "turbo run build && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "postinstall": "nuxt prepare",

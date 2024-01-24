@@ -2,6 +2,7 @@
 node_modules
 
 # Nuxt dev/build outputs
+.turbo
 .output
 .data
 .nuxt
