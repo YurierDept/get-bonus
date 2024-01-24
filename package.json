@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.0",
+    "@total-typescript/ts-reset": "^0.5.1",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.11.6",
     "@unocss/nuxt": "^0.58.3",

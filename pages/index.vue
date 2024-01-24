@@ -16,7 +16,7 @@ const search = async () => {
   try {
     isSearching.value = true;
     const resp = await $fetch(`/api/search/${searchInput.value}`, {});
-    results.value = resp.result.filter(Boolean) as Detail[];
+    results.value = resp.result.filter(Boolean);
   } finally {
     isSearching.value = false;
   }
