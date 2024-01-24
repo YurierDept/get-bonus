@@ -7,7 +7,7 @@ export class Mangaoh extends Provider {
     super('mangaoh');
   }
 
-  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
     return [];
   }
 

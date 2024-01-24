@@ -7,7 +7,7 @@ export class Gamers extends Provider {
     super('gamers');
   }
 
-  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
     return [];
   }
 

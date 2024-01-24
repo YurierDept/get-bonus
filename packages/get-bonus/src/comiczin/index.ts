@@ -7,7 +7,7 @@ export class Comiczin extends Provider {
     super('comiczin');
   }
 
-  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
     return [];
   }
 

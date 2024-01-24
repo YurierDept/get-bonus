@@ -42,7 +42,7 @@ export abstract class Provider {
     this.id = name;
   }
 
-  abstract search(text: string, options?: Partial<SearchOptions>): Promise<SearchResult[]>;
+  abstract search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]>;
 
   abstract detail(url: string): Promise<Detail | undefined>;
 }

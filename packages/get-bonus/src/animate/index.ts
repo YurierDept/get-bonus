@@ -1,6 +1,8 @@
 import type { Detail, SearchResult, SearchOptions, DetailItem } from '../types';
 
 import { JSDOM } from 'jsdom';
+import { ofetch } from 'ofetch';
+
 import { Provider } from '../scraper';
 
 export class Animate extends Provider {
@@ -8,8 +10,8 @@ export class Animate extends Provider {
     super('animate');
   }
 
-  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
-    const html: string = await $fetch('https://www.melonbooks.co.jp/search/search.php', {
+  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+    const html: string = await ofetch('https://www.melonbooks.co.jp/search/search.php', {
       query: {
         name: text,
         'additional[]': 'pr'

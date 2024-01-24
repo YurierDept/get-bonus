@@ -7,7 +7,7 @@ export class Melonbooks extends Provider {
     super('melonbooks');
   }
 
-  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
     return [];
   }
 

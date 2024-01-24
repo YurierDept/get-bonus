@@ -1,6 +1,8 @@
 import type { Detail, SearchResult, SearchOptions, DetailItem } from '../types';
 
 import { JSDOM } from 'jsdom';
+import { ofetch } from 'ofetch';
+
 import { Provider } from '../scraper';
 
 export class Toranoana extends Provider {
@@ -8,8 +10,8 @@ export class Toranoana extends Provider {
     super('toranoana');
   }
 
-  async search(text: string, options?: SearchOptions): Promise<SearchResult[]> {
-    const html: string = await $fetch('https://ecs.toranoana.jp/tora/ec/app/catalog/list', {
+  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+    const html: string = await ofetch('https://ecs.toranoana.jp/tora/ec/app/catalog/list', {
       query: {
         searchWord: text,
         stock_status: '○,△',
