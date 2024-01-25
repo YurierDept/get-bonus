@@ -38,15 +38,18 @@ export class Comiczin extends Provider {
     const doc = dom.window.document;
 
     const title = doc.querySelector('.fw_main_block_header_type2');
-    const imgs = doc.querySelectorAll('img[id^=sample_img]');
+    const imgs = doc.querySelectorAll('img[id^=sample_img]:not(img[src$="no_img_list.jpg"])');
+    imgs.forEach((img) => console.log(`ComicZin获取到图片链接：${this.baseUrl + (img as HTMLImageElement).src}`));
     const descs = doc.
       querySelector('.div_block_main_item_comment')
       ?.textContent;
-
-    const items = [...imgs].map((img,i) => ({
-      image: (img as HTMLImageElement).src,
-      description: descs?.substring(descs.lastIndexOf('【ZIN特典】')) || ''
-    }));
+    console.log(`ComicZin获取到标题：${title?.textContent}`);
+    const items = [...imgs]
+      // .filter((img) => !((img as HTMLImageElement).src.includes('no_img_list.jpg')))
+      .map((img,i) => ({
+        image: this.baseUrl + (img as HTMLImageElement).src,
+        description: descs?.substring(descs.lastIndexOf('【ZIN特典】')) || ''
+      }));
     return {
       provider: this.id,
       title: title?.textContent?.trim() || '',
