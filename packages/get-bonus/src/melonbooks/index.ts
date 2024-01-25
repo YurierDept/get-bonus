@@ -42,7 +42,6 @@ export class Melonbooks extends Provider {
     const title = doc.querySelector('.page-header')?.textContent?.trim() || '';
     const date = resolveDate(doc.querySelector('.row_sale_date')?.textContent?.trim());
     const price = resolvePrice(doc.querySelector('.price .yen')?.textContent?.trim());
-    console.log(price);
 
     const privItems = doc.querySelectorAll('.priv-item');
     const items = [...privItems].map((item) => {
