@@ -61,6 +61,7 @@ export class Scraper {
 
 export abstract class Provider {
   public readonly id: string;
+
   public readonly baseUrl: string;
 
   constructor(name: string, baseUrl: string) {

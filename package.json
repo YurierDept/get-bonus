@@ -1,10 +1,12 @@
 {
   "name": "@get-bonus/monorepo",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "turbo run build && nuxt build",
     "dev": "nuxt dev",
+    "format": "prettier --write **/*.{ts,vue}",
     "generate": "nuxt generate",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
@@ -48,6 +50,5 @@
   "packageManager": "pnpm@8.14.3",
   "engines": {
     "node": ">=v20.10.0"
-  },
-  "version": "0.0.1"
+  }
 }
