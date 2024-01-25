@@ -9,7 +9,7 @@ export class Comiczin extends Provider {
     super('comiczin', 'https://shop.comiczin.jp');
   }
 
-  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {
     const html = await ofetch(this.baseUrl + '/products/list.php', {
       query: {
         mode: 'search',
@@ -40,11 +40,10 @@ export class Comiczin extends Provider {
     const title = doc.querySelector('.fw_main_block_header_type2');
     const imgs = doc.querySelectorAll('img[id^=sample_img]:not(img[src$="s.jpg"])');
     const descs = doc.querySelector('.div_block_main_item_comment')?.textContent;
-    const items = [...imgs]
-      .map((img, i) => ({
-        image: this.baseUrl + (img as HTMLImageElement).src,
-        description: descs?.substring(descs.lastIndexOf('【ZIN特典】')).split('\n')[0] || ''
-      }));
+    const items = [...imgs].map((img, i) => ({
+      image: this.baseUrl + (img as HTMLImageElement).src,
+      description: descs?.substring(descs.lastIndexOf('【ZIN特典】')).split('\n')[0] || ''
+    }));
     return {
       provider: this.id,
       title: title?.textContent?.trim() || '',

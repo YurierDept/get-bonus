@@ -10,7 +10,7 @@ export class Animate extends Provider {
     super('animate', '');
   }
 
-  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {
     return [];
   }
 

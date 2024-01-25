@@ -10,7 +10,7 @@ export class Toranoana extends Provider {
     super('toranoana', 'https://ecs.toranoana.jp');
   }
 
-  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {
     const html = await ofetch(this.baseUrl + '/tora/ec/app/catalog/list', {
       query: {
         searchWord: text,
