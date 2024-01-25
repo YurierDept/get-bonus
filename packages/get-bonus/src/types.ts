@@ -20,6 +20,10 @@ export interface Detail {
 
   url: string;
 
+  date?: string;
+
+  price?: number;
+
   items: DetailItem[];
 
   // TODO

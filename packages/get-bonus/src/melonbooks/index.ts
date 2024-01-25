@@ -40,6 +40,10 @@ export class Melonbooks extends Provider {
     const doc = dom.window.document;
 
     const title = doc.querySelector('.page-header')?.textContent?.trim() || '';
+    const date = resolveDate(doc.querySelector('.row_sale_date')?.textContent?.trim());
+    const price = resolvePrice(doc.querySelector('.price .yen')?.textContent?.trim());
+    console.log(price);
+
     const privItems = doc.querySelectorAll('.priv-item');
     const items = [...privItems].map((item) => {
       const img = item.querySelector('.priv_img') as HTMLImageElement;
@@ -53,10 +57,32 @@ export class Melonbooks extends Provider {
     return {
       provider: this.id,
       title,
+      date,
+      price,
       url,
       items
     };
   }
+}
+
+/**
+ * Pattern: `発売日：2020年07月27日`
+ */
+function resolveDate(t?: string) {
+  if (!t) return undefined;
+  const RE = /(\d+)年(\d+)月(\d+)日/;
+  const match = RE.exec(t);
+  if (match) {
+    return `${match[1]}-${match[2]}-${match[3]}`;
+  }
+  return undefined;
+}
+
+function resolvePrice(t?: string) {
+  console.log(t);
+  if (!t) return undefined;
+  const match = /(\d+)/.exec(t);
+  return match ? +match[1] : undefined;
 }
 
 function enforceHTTPS(url: string) {

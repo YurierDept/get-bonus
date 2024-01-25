@@ -12,7 +12,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div :class="cn(badgeVariants({ variant }), $attrs.class ?? '', 'select-none')">
+  <div :class="cn(badgeVariants({ variant }), $attrs.class ?? '')">
     <slot />
   </div>
 </template>
