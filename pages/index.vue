@@ -57,6 +57,7 @@ watch(
   }
 );
 
+const randomNum = 2;
 const examples = [
   '週に一度クラスメイトを買う話',
   '星屑テレパス',
@@ -64,10 +65,9 @@ const examples = [
   'このはな綺譚'
 ];
 const random = (arr: string[]) => {
-  const num = 2;
   const result = [];
   const tempArray = arr.slice(); // Create a copy of the original array
-  for (let i = 0; i < num; i++) {
+  for (let i = 0; i < randomNum; i++) {
     const randomIndex = Math.floor(Math.random() * tempArray.length);
     const selectedValue = tempArray[randomIndex];
     result.push(selectedValue);
