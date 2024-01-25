@@ -14,7 +14,7 @@ export class Melonbooks extends Provider {
     const html = await ofetch(this.baseUrl + '/search/search.php', {
       query: {
         mode: 'search',
-        text_type: 'title', // 検索キーワード: 作品タイトル
+        text_type: options.onlySearchTitle ? 'title' : undefined, // 検索キーワード: 作品タイトル
         name: text,
         'additional[]': 'pr',
         'category_ids[]': '4', // コミック

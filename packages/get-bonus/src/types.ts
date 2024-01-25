@@ -1,5 +1,5 @@
 export interface SearchOptions {
-  onlySearchTitle: string;
+  onlySearchTitle: boolean;
 
   category: string;
   // TODO

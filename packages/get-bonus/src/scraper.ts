@@ -13,7 +13,7 @@ export class Scraper {
     const results = await Promise.all(
       this.providers.map(async (provider) => {
         try {
-          const resp = await provider.search(text, options);
+          const resp = await provider.search(text, { onlySearchTitle, ...options });
 
           // 对搜索结果进行进一步过滤, 结果的标题必须包含所有搜索字符串
           if (onlySearchTitle) {
