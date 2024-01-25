@@ -9,7 +9,7 @@ export class Comiczin extends Provider {
     super('comiczin', 'https://shop.comiczin.jp');
   }
 
-  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {
     const html = await ofetch(this.baseUrl + '/products/list.php', {
       query: {
         mode: 'search',
@@ -47,6 +47,7 @@ export class Comiczin extends Provider {
         image: this.baseUrl + (img as HTMLImageElement).src,
         description: descs?.substring(descs.lastIndexOf('【ZIN特典】')).split('\n')[0].replace('【ZIN特典】','') || ''
       }));
+
     return {
       provider: this.id,
       title: title?.textContent?.trim() || '',

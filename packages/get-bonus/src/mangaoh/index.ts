@@ -10,7 +10,7 @@ export class Mangaoh extends Provider {
     super('mangaoh', 'https://www.mangaoh.co.jp');
   }
 
-  async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
+  async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {
     const html = await ofetch(this.baseUrl + '/search', {
       query: {
         q: text + ' +特典'

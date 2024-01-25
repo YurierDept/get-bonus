@@ -1,4 +1,6 @@
 export interface SearchOptions {
+  onlySearchTitle: boolean;
+
   category: string;
   // TODO
 }
@@ -23,6 +25,8 @@ export interface Detail {
   date?: string;
 
   price?: number;
+
+  status?: '预售' | '有货' | '缺货';
 
   items: DetailItem[];
 
