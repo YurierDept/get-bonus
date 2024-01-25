@@ -77,11 +77,14 @@ function resolveDate(t?: string) {
   return undefined;
 }
 
+/**
+ * Pattern: `¥2,970`
+ */
 function resolvePrice(t?: string) {
   console.log(t);
   if (!t) return undefined;
-  const match = /(\d+)/.exec(t);
-  return match ? +match[1] : undefined;
+  const match = /([0-9,]+)/.exec(t);
+  return match ? +match[1].replace(/,/g, '') : undefined;
 }
 
 function enforceHTTPS(url: string) {
