@@ -10,18 +10,18 @@ export class Comiczin extends Provider {
   }
 
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
-    const html = await ofetch(this.baseUrl + '/products/list.php',{
-      query:{
+    const html = await ofetch(this.baseUrl + '/products/list.php', {
+      query: {
         mode: 'search',
         name: text
       }
-    })
+    });
 
     const dom = new JSDOM(html);
     const doc = dom.window.document;
 
     const resultItems = doc.querySelectorAll('div.list_item');
-    
+
     return [...resultItems].map((item) => {
       const a = item.querySelector('a.title_area') as HTMLAnchorElement;
       return {
@@ -38,15 +38,10 @@ export class Comiczin extends Provider {
     const doc = dom.window.document;
 
     const title = doc.querySelector('.fw_main_block_header_type2');
-    const imgs = doc.querySelectorAll('img[id^=sample_img]:not(img[src$="no_img_list.jpg"])');
-    imgs.forEach((img) => console.log(`ComicZin获取到图片链接：${this.baseUrl + (img as HTMLImageElement).src}`));
-    const descs = doc.
-      querySelector('.div_block_main_item_comment')
-      ?.textContent;
-    console.log(`ComicZin获取到标题：${title?.textContent}`);
+    const imgs = doc.querySelectorAll('img[id^=sample_img]:not(img[src$="s.jpg"])');
+    const descs = doc.querySelector('.div_block_main_item_comment')?.textContent;
     const items = [...imgs]
-      // .filter((img) => !((img as HTMLImageElement).src.includes('no_img_list.jpg')))
-      .map((img,i) => ({
+      .map((img, i) => ({
         image: this.baseUrl + (img as HTMLImageElement).src,
         description: descs?.substring(descs.lastIndexOf('【ZIN特典】')) || ''
       }));
