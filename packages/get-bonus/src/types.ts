@@ -26,6 +26,8 @@ export interface Detail {
 
   price?: number;
 
+  status?: '预售' | '有货' | '缺货';
+
   items: DetailItem[];
 
   // TODO
