@@ -46,6 +46,7 @@ watch(
   () => route.query.q,
   (q) => {
     if (!q) {
+      searchInput.value = '';
       details.value = null;
     } else if (typeof q === 'string') {
       if (searchInput.value !== q) {
