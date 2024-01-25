@@ -61,6 +61,7 @@ const search = async () => {
       <div v-else-if="details && foundNums === 0" class="flex items-center justify-center">
         <span class="text-2xl font-bold">未找到商品</span>
       </div>
+      <div v-else class="border-t"></div>
     </div>
   </div>
 </template>
