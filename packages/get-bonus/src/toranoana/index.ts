@@ -37,8 +37,12 @@ export class Toranoana extends Provider {
     const html = await ofetch(url);
     const dom = new JSDOM(html);
     const doc = dom.window.document;
-
+  
     const title = doc.querySelector('.product-detail-desc-title')?.textContent || '';
+    const price = resolvePrice(doc.querySelector('li.pricearea__price--normal:nth-child(1)')?.textContent?.trim());
+    const date = resolveDate(doc
+      .querySelector('.product-detail-spec-table > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2) > a:nth-child(1) > span:nth-child(1)')
+      ?.textContent?.trim());
     const items: DetailItem[] = [];
 
     const img = doc.querySelector('.product-detail-image-main img') as HTMLImageElement;
@@ -50,8 +54,34 @@ export class Toranoana extends Provider {
     return {
       provider: this.id,
       title,
+      date,
+      price,
       url,
       items
     };
   }
+}
+
+/**
+ * Pattern: `2023/09/27 発売 `
+ */
+function resolveDate(t?: string) {
+  console.log("tora:"+t);
+  if (!t) return undefined;
+  const RE = /(\d+)\/(\d+)\/(\d+)/;
+  const match = RE.exec("tora:"+t);
+  if (match) {
+    return `${match[1]}-${match[2]}-${match[3]}`;
+  }
+  return undefined;
+}
+
+/**
+ * Pattern: `990円(税込)`
+ */
+function resolvePrice(t?: string) {
+  console.log("tora:"+t);
+  if (!t) return undefined;
+  const match = /([0-9,]+)/.exec(t);
+  return match ? +match[1].replace(/,/g, '') : undefined;
 }
