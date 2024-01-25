@@ -105,7 +105,7 @@ const random = (arr: string[]) => {
             <a href="https://www.mangaoh.co.jp" target="_blank">mangaoh</a>,
             <a href="https://www.melonbooks.co.jp" target="_blank">melonbooks</a>,
             <a href="https://ecs.toranoana.jp" target="_blank">虎之穴</a>
-            等购物平台检索商品和对应特典
+            等购物平台检索<span font-bold>商品</span>和对应<span font-bold>特典</span>
           </p>
           <p>
             试一试吧：
