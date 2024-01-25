@@ -1,7 +1,7 @@
 import type { SearchResult, Detail, SearchOptions } from './types';
 
 export class Scraper {
-  private readonly providers: Provider[];
+  public readonly providers: Provider[];
 
   public constructor(...providers: Provider[]) {
     this.providers = providers;
@@ -16,7 +16,7 @@ export class Scraper {
         } catch (error) {
           console.log(`搜索 ${provider.id} 失败: ${text}`);
           console.error(error);
-          return [provider.id, []];
+          return [provider.id, [] as SearchResult[]] as const;
         }
       })
     );
@@ -38,19 +38,24 @@ export class Scraper {
     }
   }
 
-  async getAllDetails(search: SearchResult[]) {
+  async getAllDetails(search: Record<string, SearchResult[]>) {
     const resp = await Promise.all(
-      search.map(async (t) => {
-        try {
-          return await this.getDetail(t.provider, t.url);
-        } catch (error) {
-          console.log(`获取详情失败: ${t.url}`);
-          console.error(error);
-          return undefined;
-        }
+      Object.entries(search).map(async ([id, list]) => {
+        const details = await Promise.all(
+          list.map(async (t) => {
+            try {
+              return await this.getDetail(t.provider, t.url);
+            } catch (error) {
+              console.log(`获取详情失败: ${t.url}`);
+              console.error(error);
+              return undefined;
+            }
+          })
+        );
+        return [id, details.filter(Boolean) as Detail[]] as const;
       })
     );
-    return resp.filter(Boolean) as Detail[];
+    return Object.fromEntries(resp);
   }
 }
 

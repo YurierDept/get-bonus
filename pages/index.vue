@@ -14,7 +14,10 @@ const { data } = await useAsyncData('search_results', async () =>
   route.query.q ? $fetch(`/api/search/${route.query.q}`) : undefined
 );
 
-const results = ref<Detail[] | null>(data.value?.result ?? null);
+const details = ref<Record<string, Detail[]> | null>(data.value?.details ?? null);
+const foundNums = computed(() => {
+  return Object.entries(details.value ?? {}).reduce((acc, t) => acc + t[1].length, 0);
+});
 
 const searchInput = ref('');
 const isSearching = ref(false);
@@ -30,9 +33,9 @@ const search = async () => {
   try {
     isSearching.value = true;
     const resp = await $fetch(`/api/search/${searchInput.value}`, {});
-    results.value = resp.result.filter(Boolean);
+    details.value = resp.details;
   } catch {
-    results.value = [];
+    details.value = {};
   } finally {
     isSearching.value = false;
   }
@@ -54,8 +57,8 @@ const search = async () => {
     </div>
     <div class="w-full mt-6 pb-16">
       <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
-      <SearchResult v-else-if="results && results.length > 0" :results="results"></SearchResult>
-      <div v-else-if="results && results.length === 0" class="flex items-center justify-center">
+      <SearchResult v-else-if="details && foundNums > 0" :details="details"></SearchResult>
+      <div v-else-if="details && foundNums === 0" class="flex items-center justify-center">
         <span class="text-2xl font-bold">未找到商品</span>
       </div>
     </div>
