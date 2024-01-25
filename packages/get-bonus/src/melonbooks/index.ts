@@ -13,6 +13,8 @@ export class Melonbooks extends Provider {
   async search(text: string, options: SearchOptions): Promise<SearchResult[]> {
     const html = await ofetch(this.baseUrl + '/search/search.php', {
       query: {
+        mode: 'search',
+        text_type: 'title', // 検索キーワード: 作品タイトル
         name: text,
         'additional[]': 'pr',
         'category_ids[]': '4', // コミック
