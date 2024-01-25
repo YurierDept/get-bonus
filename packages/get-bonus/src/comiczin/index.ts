@@ -43,7 +43,7 @@ export class Comiczin extends Provider {
     const items = [...imgs]
       .map((img, i) => ({
         image: this.baseUrl + (img as HTMLImageElement).src,
-        description: descs?.substring(descs.lastIndexOf('【ZIN特典】')) || ''
+        description: descs?.substring(descs.lastIndexOf('【ZIN特典】')).split('\n')[0] || ''
       }));
     return {
       provider: this.id,
