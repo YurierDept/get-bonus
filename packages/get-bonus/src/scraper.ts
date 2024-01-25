@@ -8,10 +8,20 @@ export class Scraper {
   }
 
   async search(text: string, options: Partial<SearchOptions> = {}) {
+    const { onlySearchTitle = true } = options;
+
     const results = await Promise.all(
       this.providers.map(async (provider) => {
         try {
           const resp = await provider.search(text, options);
+
+          // 对搜索结果进行进一步过滤, 结果的标题必须包含所有搜索字符串
+          if (onlySearchTitle) {
+            const pieces = text.split(' ').filter(Boolean);
+            const filtered = resp.filter((result) => pieces.every((p) => result.title.includes(p)));
+            resp.splice(0, resp.length, ...filtered);
+          }
+
           return [provider.id, resp] as const;
         } catch (error) {
           console.log(`搜索 ${provider.id} 失败: ${text}`);
@@ -20,6 +30,7 @@ export class Scraper {
         }
       })
     );
+
     return Object.fromEntries(results);
   }
 

@@ -1,4 +1,6 @@
 export interface SearchOptions {
+  onlySearchTitle: string;
+
   category: string;
   // TODO
 }
