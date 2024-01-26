@@ -37,7 +37,7 @@
     "@unocss/reset": "^0.58.4",
     "bumpp": "latest",
     "jsdom": "^24.0.0",
-    "lucide-vue-next": "^0.315.0",
+    "lucide-vue-next": "^0.316.0",
     "nuxt": "^3.9.3",
     "prettier": "^3.2.4",
     "shadcn-nuxt": "^0.8.7",
