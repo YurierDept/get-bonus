@@ -11,12 +11,30 @@ const props = defineProps<{
 const img = useImage();
 
 async function downloadImage() {
-  // TODO
-  const image = img(props.data.image, { format: 'png' });
-  console.log(`下载图片:`, image);
-  const data = await $fetch(image, { responseType: 'arrayBuffer' });
+  try {
+    const imageURL = new URL(props.data.image);
+    const image = img(props.data.image);
+    console.log(`下载图片:`, image);
+    const blob = await $fetch<Blob>(image, { responseType: 'blob' });
+    const url = URL.createObjectURL(blob);
 
-  toast('WIP', { description: 'WIP' });
+    // 创建 a 标签
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = imageURL.pathname.split('/').at(-1) || 'downloaded_image';
+    document.body.appendChild(a);
+    a.click();
+
+    // 清理
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast.success('下载图片成功', {});
+  } catch (error) {
+    console.error(error);
+    toast.error('下载图片失败', {});
+  }
 }
 
 async function copyImage() {
