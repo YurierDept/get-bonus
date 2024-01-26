@@ -48,13 +48,23 @@ export class Animate extends Provider {
     const date = resolveDate(main.querySelector('.item_status .release .num')?.textContent?.trim());
     const price = resolvePrice(main.querySelector('.item_price .price')?.textContent?.trim());
 
+    const items = [...doc.querySelectorAll('.item_benefit .detail')].map((node) => {
+      const image = node.querySelector('.image img') as HTMLImageElement;
+      const description = node.querySelector('.text')?.textContent?.trim() ?? '';
+
+      return {
+        image: image.src,
+        description
+      };
+    });
+
     return {
       provider: this.id,
       title,
       url,
       date,
       price,
-      items: [] // TODO
+      items
     };
   }
 }
