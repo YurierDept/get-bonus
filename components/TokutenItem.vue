@@ -20,14 +20,11 @@ async function downloadImage() {
 
     // 创建 a 标签
     const a = document.createElement('a');
-    a.style.display = 'none';
     a.href = url;
     a.download = imageURL.pathname.split('/').at(-1) || 'downloaded_image';
-    document.body.appendChild(a);
     a.click();
 
     // 清理
-    document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
     toast.success('下载图片成功', {});
