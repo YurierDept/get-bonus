@@ -3,10 +3,6 @@ import type { Detail } from 'get-bonus';
 
 import { Loader2, Search } from 'lucide-vue-next';
 
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-
 const route = useRoute();
 const router = useRouter();
 
