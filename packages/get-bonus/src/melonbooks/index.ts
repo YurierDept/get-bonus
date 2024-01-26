@@ -83,7 +83,6 @@ function resolveDate(t?: string) {
  * Pattern: `¥2,970`
  */
 function resolvePrice(t?: string) {
-  console.log(t);
   if (!t) return undefined;
   const match = /([0-9,]+)/.exec(t);
   return match ? +match[1].replace(/,/g, '') : undefined;

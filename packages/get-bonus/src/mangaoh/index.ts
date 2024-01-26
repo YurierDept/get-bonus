@@ -44,9 +44,11 @@ export class Mangaoh extends Provider {
     const date = doc
       .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(3) > td:nth-child(2)')
       ?.textContent?.trim();
-    const price = resolvePrice(doc
-      .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(2) > td:nth-child(2)')
-      ?.textContent?.trim());
+    const price = resolvePrice(
+      doc
+        .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(2) > td:nth-child(2)')
+        ?.textContent?.trim()
+    );
     const items = [...imgs].map((img, i) => ({
       image: (img as HTMLImageElement).src,
       description: descs?.[i] || ''
@@ -67,7 +69,7 @@ export class Mangaoh extends Provider {
  * Pattern: `3,740円(本体3,400円) `
  */
 function resolvePrice(t?: string) {
-  console.log(t);
+  t;
   if (!t) return undefined;
   const match = /([0-9,]+)/.exec(t);
   return match ? +match[1].replace(/,/g, '') : undefined;
