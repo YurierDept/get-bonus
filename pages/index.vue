@@ -108,8 +108,8 @@ const random = (arr: string[]) => {
             等商家网站检索<span font-bold>商品</span>和对应<span font-bold>特典</span>。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            本项目主要由 <span font-bold>Yurier Dev</span> 开发，且开源。
-            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">Github Repo</a>
+            本项目主要由 <span font-bold>Yurier Dev</span> 开发，且开源
+            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub 仓库</a>。
           </p>
           <p>
             试一试吧：
