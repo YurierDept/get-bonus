@@ -14,11 +14,7 @@ const detailEntries = computed(() => {
       <AccordionTrigger>{{ id }}</AccordionTrigger>
       <AccordionContent>
         <ul class="grid gap-4">
-          <ResultItem
-            v-for="result in results"
-            :key="result.url"
-            :data="result"
-          />
+          <ResultItem v-for="result in results" :key="result.url" :data="result" />
         </ul>
       </AccordionContent>
     </AccordionItem>
