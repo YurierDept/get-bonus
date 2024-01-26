@@ -12,14 +12,29 @@ const img = useImage();
 
 async function downloadImage() {
   // TODO
-  const image = img(props.data.image);
-  console.log(image);
+  const image = img(props.data.image, { format: 'png' });
+  console.log(`下载图片:`, image);
+  const data = await $fetch(image, { responseType: 'arrayBuffer' });
+
   toast('WIP', { description: 'WIP' });
 }
 
 async function copyImage() {
-  // TODO
-  toast('WIP', { description: 'WIP' });
+  try {
+    // 转换成 png
+    const image = img(props.data.image, { format: 'png' });
+    console.log(`复制图片:`, image);
+    const blob = await $fetch<Blob>(image, { responseType: 'blob' });
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        [blob.type]: blob
+      })
+    ]);
+    toast.success('复制图片成功', {});
+  } catch (error) {
+    console.error(error);
+    toast.error('复制图片失败', {});
+  }
 }
 
 async function copyDescription() {

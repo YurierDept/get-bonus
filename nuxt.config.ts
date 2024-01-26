@@ -28,7 +28,8 @@ export default defineNuxtConfig({
       'ecdnimg.toranoana.jp',
       'gamers.co.jp',
       'comiczin.jp',
-      'mangaoh.co.jp'
+      'mangaoh.co.jp',
+      'tc-gamers.techorus-cdn.com'
     ]
   },
   unocss: {
