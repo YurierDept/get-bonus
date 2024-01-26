@@ -1,9 +1,10 @@
-import type { Detail, SearchResult, SearchOptions } from '../types';
+import type { Detail, SearchResult, SearchOptions, DetailItem } from '../types';
 
 import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Gamers extends Provider {
   constructor() {
@@ -49,9 +50,9 @@ export class Gamers extends Provider {
     const items = [...tokutens].map((item) => {
       const img = item.querySelector('img') as HTMLImageElement;
       const info = item.querySelector('.tokuten_name');
-      return {
+      return <DetailItem>{
         image: img.src,
-        description: info?.textContent || ''
+        description: removeExtraSpaces(info?.textContent || '')
       };
     });
 

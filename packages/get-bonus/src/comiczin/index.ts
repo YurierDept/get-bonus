@@ -1,8 +1,10 @@
 import type { Detail, SearchResult, SearchOptions } from '../types';
 
-import { Provider } from '../scraper';
-import { ofetch } from 'ofetch';
 import { JSDOM } from 'jsdom';
+import { ofetch } from 'ofetch';
+
+import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Comiczin extends Provider {
   constructor() {
@@ -48,11 +50,12 @@ export class Comiczin extends Provider {
     );
     const items = [...imgs].map((img, i) => ({
       image: this.baseUrl + (img as HTMLImageElement).src,
-      description:
+      description: removeExtraSpaces(
         descs
           ?.substring(descs.lastIndexOf('【ZIN特典】'))
           .split('\n')[0]
           .replace('【ZIN特典】', '') || ''
+      )
     }));
 
     return {

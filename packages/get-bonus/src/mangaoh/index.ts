@@ -1,9 +1,10 @@
-import type { Detail, SearchResult, SearchOptions } from '../types';
+import type { Detail, SearchResult, SearchOptions, DetailItem } from '../types';
 
 import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Mangaoh extends Provider {
   constructor() {
@@ -49,10 +50,13 @@ export class Mangaoh extends Provider {
         .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(2) > td:nth-child(2)')
         ?.textContent?.trim()
     );
-    const items = [...imgs].map((img, i) => ({
-      image: (img as HTMLImageElement).src,
-      description: descs?.[i] || ''
-    }));
+    const items = [...imgs].map(
+      (img, i) =>
+        <DetailItem>{
+          image: (img as HTMLImageElement).src,
+          description: removeExtraSpaces(descs?.[i] || '')
+        }
+    );
 
     return {
       provider: this.id,

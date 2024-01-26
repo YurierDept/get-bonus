@@ -4,6 +4,7 @@ import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Animate extends Provider {
   constructor() {
@@ -50,9 +51,9 @@ export class Animate extends Provider {
 
     const items = [...doc.querySelectorAll('.item_benefit .detail')].map((node) => {
       const image = node.querySelector('.image img') as HTMLImageElement;
-      const description = node.querySelector('.text')?.textContent?.trim() ?? '';
+      const description = removeExtraSpaces(node.querySelector('.text')?.textContent?.trim() ?? '');
 
-      return {
+      return <DetailItem>{
         image: image.src,
         description
       };
