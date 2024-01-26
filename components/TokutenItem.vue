@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { DetailItem } from 'get-bonus';
 
+import { toast } from 'vue-sonner';
 import { Download, Copy, ClipboardCopy } from 'lucide-vue-next';
 
 const props = defineProps<{
@@ -9,14 +10,17 @@ const props = defineProps<{
 
 async function downloadImage() {
   // TODO
+  toast('WIP', { description: 'WIP' });
 }
 
 async function copyImage() {
   // TODO
+  toast('WIP', { description: 'WIP' });
 }
 
-function copyDescription() {
-  navigator.clipboard.writeText(props.data.description);
+async function copyDescription() {
+  await navigator.clipboard.writeText(props.data.description);
+  toast(`复制描述成功`, {});
 }
 </script>
 
