@@ -5,6 +5,8 @@ import { toast } from 'vue-sonner';
 import { Download, Copy, ClipboardCopy } from 'lucide-vue-next';
 
 const props = defineProps<{
+  title: string;
+  index: number;
   data: DetailItem;
 }>();
 
@@ -12,7 +14,6 @@ const img = useImage();
 
 async function downloadImage() {
   try {
-    const imageURL = new URL(props.data.image);
     const image = img(props.data.image);
     console.log(`下载图片:`, image);
     const blob = await $fetch<Blob>(image, { responseType: 'blob' });
@@ -21,7 +22,7 @@ async function downloadImage() {
     // 创建 a 标签
     const a = document.createElement('a');
     a.href = url;
-    a.download = imageURL.pathname.split('/').at(-1) || 'downloaded_image';
+    a.download = `${props.title}_${props.index}`;
     a.click();
 
     // 清理

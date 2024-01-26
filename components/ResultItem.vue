@@ -40,7 +40,7 @@ async function copyTitle() {
       </Badge>
     </span>
     <ul>
-      <TokutenItem v-for="item in data.items" :data="item" />
+      <TokutenItem v-for="(item, i) in data.items" :title="data.title" :index="i" :data="item" />
     </ul>
   </li>
 </template>
