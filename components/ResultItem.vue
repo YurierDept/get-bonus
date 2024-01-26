@@ -20,17 +20,14 @@ const baseUrl = computed(() => {
         <Badge variant="outline" class="select-none">{{ data.provider }}</Badge>
       </a>
       <Badge v-if="data.date" variant="outline"
-        ><span class="select-none mr-1">发售于</span><span>{{ data.date }}</span></Badge
-      >
+        ><span class="select-none mr-1">发售于</span><span>{{ data.date }}</span>
+      </Badge>
       <Badge v-if="data.price" variant="outline"
-        ><span class="select-none mr-1">¥</span><span>{{ data.price }}</span></Badge
-      >
+        ><span class="select-none mr-1">¥</span><span>{{ data.price }}</span>
+      </Badge>
     </span>
     <ul>
-      <li v-for="{ image, description } in data.items" class="flex gap-4 mt-4">
-        <img class="max-w-36" :src="image" />
-        <p class="text-3.5 whitespace-pre-line">{{ description }}</p>
-      </li>
+      <TokutenItem v-for="item in data.items" :data="item" />
     </ul>
   </li>
 </template>
