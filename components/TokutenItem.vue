@@ -8,8 +8,12 @@ const props = defineProps<{
   data: DetailItem;
 }>();
 
+const img = useImage();
+
 async function downloadImage() {
   // TODO
+  const image = img(props.data.image);
+  console.log(image);
   toast('WIP', { description: 'WIP' });
 }
 
@@ -26,7 +30,7 @@ async function copyDescription() {
 
 <template>
   <li class="flex gap-4 mt-4">
-    <img class="max-w-36" :src="data.image" />
+    <NuxtImg class="max-w-36" :src="data.image" />
     <div class="grid grid-rows-[1fr_auto] gap-2">
       <p class="text-3.5 whitespace-pre-line">{{ data.description }}</p>
       <div class="flex gap-4">

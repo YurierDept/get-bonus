@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@unocss/nuxt', 'shadcn-nuxt'],
+  modules: ['@unocss/nuxt', 'shadcn-nuxt', '@nuxt/image'],
   alias: {
     'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))
   },
@@ -18,6 +18,18 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', href: '/favicon.ico' }],
       meta: []
     }
+  },
+  image: {
+    domains: [
+      'melonbooks.co.jp',
+      'animate.co.jp',
+      'ecs.toranoana.jp',
+      'toranoana.jp',
+      'ecdnimg.toranoana.jp',
+      'gamers.co.jp',
+      'comiczin.jp',
+      'mangaoh.co.jp'
+    ]
   },
   unocss: {
     preflight: true
