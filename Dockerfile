@@ -8,7 +8,6 @@ WORKDIR /get-bonus
 
 COPY . .
 
-RUN npm i -g pnpm && pnpm install && pnpm build \
-  && ls .output/server/node_modules/sharp/build/Release
+RUN npm i -g pnpm && pnpm install && pnpm build
 
 CMD node .output/server/index.mjs
