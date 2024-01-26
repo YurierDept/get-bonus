@@ -20,7 +20,7 @@ async function copyImage() {
 
 async function copyDescription() {
   await navigator.clipboard.writeText(props.data.description);
-  toast(`复制描述成功`, {});
+  toast.success(`复制描述成功`, {});
 }
 </script>
 
