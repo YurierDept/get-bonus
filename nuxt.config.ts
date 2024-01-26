@@ -30,7 +30,9 @@ export default defineNuxtConfig({
       'gamers.co.jp',
       'tc-gamers.techorus-cdn.com',
       'comiczin.jp',
-      'mangaoh.co.jp'
+      'shop.comiczin.jp',
+      'mangaoh.co.jp',
+      'img.mangaoh.jp'
     ]
   },
   unocss: {
