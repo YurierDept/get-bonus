@@ -21,7 +21,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       ipx:
-        specifier: ^2.0.0
+        specifier: ^2.1.0
         version: 2.1.0
       radix-vue:
         specifier: ^1.3.2
@@ -1374,7 +1374,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -1383,7 +1382,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -1392,7 +1390,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -1401,7 +1398,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -1410,7 +1406,6 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -3479,7 +3474,7 @@ packages:
     hasBin: true
 
   /cssfilter@0.0.10:
-    resolution: {integrity: sha1-xtJnJjKi5cg+AT5oZKQs6N79IK4=}
+    resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
     requiresBuild: true
     dev: false
 
