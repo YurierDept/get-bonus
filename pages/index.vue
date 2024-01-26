@@ -101,7 +101,7 @@ const random = (arr: string[]) => {
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
             快速从 <a href="https://www.melonbooks.co.jp" target="_blank">Melonbooks</a>、
             <a href="https://www.animate.co.jp/">Animate</a>、
-            <a href="https://ecs.toranoana.jp" target="_blank">虎穴</a>
+            <a href="https://ecs.toranoana.jp" target="_blank">虎穴</a>\
             <a href="https://www.gamers.co.jp" target="_blank">Gamers</a>、
             <a href="https://shop.comiczin.jp" target="_blank">Comic Zin</a>、
             <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>、
