@@ -22,14 +22,15 @@ export default defineNuxtConfig({
   image: {
     domains: [
       'melonbooks.co.jp',
+      'melonbooks.akamaized.net',
       'animate.co.jp',
-      'ecs.toranoana.jp',
       'toranoana.jp',
       'ecdnimg.toranoana.jp',
+      'ecs.toranoana.jp',
       'gamers.co.jp',
+      'tc-gamers.techorus-cdn.com',
       'comiczin.jp',
-      'mangaoh.co.jp',
-      'tc-gamers.techorus-cdn.com'
+      'mangaoh.co.jp'
     ]
   },
   unocss: {
