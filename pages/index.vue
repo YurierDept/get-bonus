@@ -80,7 +80,7 @@ const random = (arr: string[]) => {
 <template>
   <div class="main">
     <div class="mt-10 select-none">
-      <span class="text-4xl font-bold">Get Bonus</span>
+      <span class="text-4xl font-bold">特典获取</span>
     </div>
     <div class="mt-8 flex gap-4">
       <Input v-model="searchInput" @keydown.enter="search(searchInput)"></Input>
@@ -99,13 +99,17 @@ const random = (arr: string[]) => {
       <div v-else class="border-t">
         <div class="mt-6 rounded-4 p-6 b-1 space-y-3 text-xl">
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            快速从 <a href="https://www.animate.co.jp/">animate</a>,
-            <a href="https://shop.comiczin.jp" target="_blank">comiczin</a>,
-            <a href="https://www.gamers.co.jp" target="_blank">gamers</a>,
-            <a href="https://www.mangaoh.co.jp" target="_blank">mangaoh</a>,
-            <a href="https://www.melonbooks.co.jp" target="_blank">melonbooks</a>,
-            <a href="https://ecs.toranoana.jp" target="_blank">虎之穴</a>
-            等购物平台检索<span font-bold>商品</span>和对应<span font-bold>特典</span>
+            快速从 <a href="https://www.melonbooks.co.jp" target="_blank">Melonbooks</a>、
+            <a href="https://www.animate.co.jp/">Animate</a>、
+            <a href="https://ecs.toranoana.jp" target="_blank">虎穴</a>
+            <a href="https://www.gamers.co.jp" target="_blank">Gamers</a>、
+            <a href="https://shop.comiczin.jp" target="_blank">Comic Zin</a>、
+            <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>、
+            等商家网站检索<span font-bold>商品</span>和对应<span font-bold>特典</span>。
+          </p>
+          <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
+            本项目主要由 <span font-bold>Yurier Dev</span> 开发，且开源。
+            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">Github Repo</a>
           </p>
           <p>
             试一试吧：
