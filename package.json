@@ -38,7 +38,7 @@
     "bumpp": "latest",
     "jsdom": "^24.0.0",
     "lucide-vue-next": "^0.319.0",
-    "nuxt": "^3.9.3",
+    "nuxt": "^3.10.0",
     "prettier": "^3.2.4",
     "shadcn-nuxt": "^0.8.7",
     "shadcn-vue": "^0.8.7",
