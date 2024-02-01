@@ -38,12 +38,15 @@ async function downloadImage() {
 
 async function copyImage() {
   try {
-    // 手动 focus
-    document.body.focus();
     // 转换成 png
     const image = img(props.data.image, { format: 'png' });
     console.log(`复制图片:`, image);
     const blob = await $fetch<Blob>(image, { responseType: 'blob' });
+
+    // 手动 focus
+    if (!document.hasFocus()) {
+      document.body.focus();
+    }
     await clipboard.write([
       new clipboard.ClipboardItem({
         [blob.type]: blob
