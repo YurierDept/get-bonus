@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { DetailItem } from 'get-bonus';
 
+import * as clipboard from 'clipboard-polyfill';
 import { toast } from 'vue-sonner';
 import { Download, Copy, ClipboardCopy } from 'lucide-vue-next';
 
@@ -41,8 +42,8 @@ async function copyImage() {
     const image = img(props.data.image, { format: 'png' });
     console.log(`复制图片:`, image);
     const blob = await $fetch<Blob>(image, { responseType: 'blob' });
-    await navigator.clipboard.write([
-      new ClipboardItem({
+    await clipboard.write([
+      new clipboard.ClipboardItem({
         [blob.type]: blob
       })
     ]);
@@ -54,7 +55,7 @@ async function copyImage() {
 }
 
 async function copyDescription() {
-  await navigator.clipboard.writeText(props.data.description);
+  await clipboard.writeText(props.data.description);
   toast.success(`复制描述成功`, {});
 }
 </script>

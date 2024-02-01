@@ -17,6 +17,9 @@ importers:
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
+      clipboard-polyfill:
+        specifier: ^4.0.2
+        version: 4.0.2
       clsx:
         specifier: ^2.1.0
         version: 2.1.0
@@ -3461,6 +3464,10 @@ packages:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
     dev: true
+
+  /clipboard-polyfill@4.0.2:
+    resolution: {integrity: sha512-AkdRB9bWwdrfb4U9vLxC1zrzp1dzV5+AZinGv8gFtrH5hWTnGUXWHIyo+alenqr+hfNFY5p7HJ+khxs2YSpxww==}
+    dev: false
 
   /clipboardy@4.0.0:
     resolution: {integrity: sha512-5mOlNS0mhX0707P2I0aZ2V/cmHUEO/fL7VFLqszkhUsxt7RwnmrInf/eEQKlf5GzvYeHIjT+Ov1HRfNmymlG0w==}
