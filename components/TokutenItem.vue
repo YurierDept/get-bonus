@@ -38,6 +38,8 @@ async function downloadImage() {
 
 async function copyImage() {
   try {
+    // 手动 focus
+    document.body.focus();
     // 转换成 png
     const image = img(props.data.image, { format: 'png' });
     console.log(`复制图片:`, image);
@@ -55,8 +57,14 @@ async function copyImage() {
 }
 
 async function copyDescription() {
-  await clipboard.writeText(props.data.description);
-  toast.success(`复制描述成功`, {});
+  try {
+    document.body.focus();
+    await clipboard.writeText(props.data.description);
+    toast.success(`复制描述成功`, {});
+  } catch (error) {
+    console.error(error);
+    toast.error('复制描述失败', {});
+  }
 }
 </script>
 
