@@ -42,7 +42,7 @@
     "prettier": "^3.2.4",
     "shadcn-nuxt": "^0.8.7",
     "shadcn-vue": "^0.8.7",
-    "turbo": "^1.12.0",
+    "turbo": "^1.12.2",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
     "unocss": "^0.58.4",
