@@ -64,8 +64,8 @@ importers:
         specifier: ^24.0.0
         version: 24.0.0
       lucide-vue-next:
-        specifier: ^0.320.0
-        version: 0.320.0(vue@3.4.15)
+        specifier: ^0.321.0
+        version: 0.321.0(vue@3.4.15)
       nuxt:
         specifier: ^3.10.0
         version: 3.10.0(@types/node@20.11.15)(rollup@3.29.4)(typescript@5.3.3)(vite@5.0.12)
@@ -5488,8 +5488,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-vue-next@0.320.0(vue@3.4.15):
-    resolution: {integrity: sha512-4FItIcUBR6qBk+QKLz9SLdhc0HyoUZlmwkOdPANecSTLz5SFsIb5V9puPN/v4Ct9nEgpGs1h6zX+p+5czn8QfQ==}
+  /lucide-vue-next@0.321.0(vue@3.4.15):
+    resolution: {integrity: sha512-r4IXuXuFneX2tAJF9TxXY/X5J0zIblI/pBPMR5vcAtDFVAKwWHoGSvCMk3dkH2dmD/uUZfNZiLI5fa07g4pbMA==}
     peerDependencies:
       vue: '>=3.0.1'
     dependencies:
