@@ -30,12 +30,13 @@ function inferTwitter(person: PersonInformation) {
   <Card class="w-full mb-6">
     <CardHeader>
       <CardTitle>
-        <a
-          :href="`https://bgm.tv/subject/${subject.id}`"
-          target="_blank"
-          class="hover:color-blue"
-          >{{ subject.name_cn || subject.name }}</a
-        >
+        <a :href="`https://bgm.tv/subject/${subject.id}`" target="_blank" class="hover:color-blue">
+          <span v-if="subject.name_cn && subject.name"
+            ><span>{{ subject.name_cn }}</span
+            ><span class="inline-block ml-2 font-normal text-base">{{ subject.name }}</span></span
+          >
+          <span v-else>{{ subject.name }}</span>
+        </a>
       </CardTitle>
       <CardDescription class="mt-2">
         <span>Bgm ID: </span>

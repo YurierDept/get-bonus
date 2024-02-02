@@ -10,7 +10,6 @@ const printBuildInfo = () => {
   console.log('Environment:', `${process.env.NODE_ENV}${isCI ? '(ci)' : ''}`);
   console.log('Commit:', sha);
   console.log('Version:', version);
-  console.log(`${name} is an open source project, you can view its source code on Github!`);
   console.log(github);
   console.groupEnd();
 };
