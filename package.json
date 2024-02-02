@@ -24,7 +24,7 @@
     "clipboard-polyfill": "^4.0.2",
     "clsx": "^2.1.0",
     "ipx": "^2.0.0",
-    "radix-vue": "^1.3.2",
+    "radix-vue": "^1.4.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "vue-sonner": "^1.0.3"
