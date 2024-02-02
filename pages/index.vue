@@ -28,12 +28,21 @@ const details = ref<FullDetail | null>(
       }
     : null
 );
-const foundNums = computed(() => {
-  return Object.entries(details.value?.details ?? {}).reduce((acc, t) => acc + t[1].length, 0);
-});
 
+let abort: AbortController | null = null;
 const searchInput = ref('');
 const isSearching = ref(false);
+const resetSearch = () => {
+  if (!abort && !searchInput.value && !details.value) return;
+  abort?.abort();
+  searchInput.value = '';
+  isSearching.value = false;
+  details.value = null;
+  router.push({
+    path: route.path,
+    query: { q: '' }
+  });
+};
 const search = async (input: string) => {
   if (isSearching.value) return;
   if (!input) return;
@@ -44,15 +53,17 @@ const search = async (input: string) => {
   });
 
   try {
+    abort = new AbortController();
     isSearching.value = true;
     const [resp1, resp2] = await Promise.all([
-      $fetch(`/api/search/${input}`, {}),
-      $fetch(`/api/bgm/${input}`, {})
+      $fetch(`/api/search/${input}`, { signal: abort.signal }),
+      $fetch(`/api/bgm/${input}`, { signal: abort.signal })
     ]);
     details.value = { details: resp1.details, subject: resp2.subject, persons: resp2.persons };
   } catch {
     details.value = { details: null, subject: null, persons: null };
   } finally {
+    abort = null;
     isSearching.value = false;
   }
 };
@@ -72,6 +83,10 @@ watch(
     }
   }
 );
+
+const foundNums = computed(() => {
+  return Object.entries(details.value?.details ?? {}).reduce((acc, t) => acc + t[1].length, 0);
+});
 
 const randomNum = 2;
 const examples = [
@@ -95,7 +110,7 @@ const random = (arr: string[]) => {
 
 <template>
   <div class="main">
-    <div class="mt-10 select-none">
+    <div class="mt-10 select-none cursor-pointer" @click="resetSearch">
       <span class="text-4xl font-bold">特典获取</span>
     </div>
     <div class="mt-8 flex gap-4">
@@ -137,19 +152,19 @@ const random = (arr: string[]) => {
             本项目主要由 <span font-bold>Yurier Dev</span> 开发，且在
             <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub 开源</a>。
           </p>
-          <p>
-            试一试吧：
-            <ClientOnly
-              ><span v-for="(title, idx) in random(examples)" :key="title"
+          <ClientOnly>
+            <p>
+              试一试吧：
+              <span v-for="(title, idx) in random(examples)" :key="title"
                 >{{ idx > 0 ? '、' : ''
                 }}<span
                   class="color-blue-400 hover:color-blue-500 cursor-pointer"
                   @click="search(title)"
                   >{{ title }}</span
                 ></span
-              ></ClientOnly
-            >
-          </p>
+              >
+            </p>
+          </ClientOnly>
         </div>
       </div>
     </div>
