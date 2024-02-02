@@ -12,7 +12,17 @@ function inferTwitter(person: PersonInformation) {
   const twitter = person.infobox?.filter(
     (ib) => ib.key === '推特' || (ib.key as string).toLowerCase() === 'twitter'
   );
-  return twitter?.[0]?.value as string | undefined;
+  const name = twitter?.[0]?.value as string | undefined;
+  if (!name) return undefined;
+  // Fix `https://twitter.com/...` to `@...`
+  const twitterURL = `https://twitter.com/`;
+  if (name.startsWith(twitterURL)) {
+    return '@' + name.slice(twitterURL.length);
+  }
+  if (name.startsWith('@')) {
+    return name;
+  }
+  return '@' + name;
 }
 </script>
 
