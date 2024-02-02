@@ -111,7 +111,7 @@ const random = (arr: string[]) => {
 <template>
   <div class="main">
     <div class="mt-10 select-none cursor-pointer" @click="resetSearch">
-      <span class="text-4xl font-bold">特典获取</span>
+      <span class="text-4xl font-bold">特典搜索</span>
     </div>
     <div class="mt-8 flex gap-4">
       <Input v-model="searchInput" @keydown.enter="search(searchInput)"></Input>
