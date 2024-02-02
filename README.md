@@ -6,16 +6,13 @@ This application is using Nuxt 3. Look at the [Nuxt 3 documentation](https://nux
 
 本项目由 Yurier Dev 创建与做出主要贡献。
 
-## 安装 / Setup
+## 开发 / Development
+
 请确保已安装依赖：
 Make sure to install the dependencies:
 
 ```bash
 pnpm install
-```
-
-## 开发测试 / Development Server
-```bash
 pnpm run dev
 ```
 
@@ -23,19 +20,21 @@ pnpm run dev
 Start the development server on `http://localhost:3000`.
 
 ## 构建 / Build
+
 ```bash
-// Build the application for production
+# Build the application for production
 pnpm run build
 ```
 
 ```bash
-// Locally preview production build
+# Locally preview production build
 pnpm run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 ## 使用协议 / License
-[LICENSE](/LICENSE)
-本程序附带 MIT License 开源。使用本程序及其源代码时，请遵守 MIT License。
 
+[LICENSE](/LICENSE)
+
+本程序附带 MIT License 开源。使用本程序及其源代码时，请遵守 MIT License。
