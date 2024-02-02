@@ -58,7 +58,7 @@ function inferTwitter(person: PersonInformation) {
             <span>{{ person.name }}</span>
             <a
               v-if="inferTwitter(person.detail)"
-              class="ml-2 inline-block select-none"
+              class="ml-2 inline-block"
               :href="`https://twitter.com/${inferTwitter(person.detail)?.slice(1)}`"
               target="_blank"
             >
