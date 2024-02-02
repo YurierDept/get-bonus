@@ -20,15 +20,21 @@ function inferTwitter(person: PersonInformation) {
   <Card class="w-full mb-6">
     <CardHeader>
       <CardTitle>
-        <a :href="`https://bgm.tv/subject/${subject.id}`" class="hover:color-blue">{{
-          subject.name_cn || subject.name
-        }}</a>
+        <a
+          :href="`https://bgm.tv/subject/${subject.id}`"
+          target="_blank"
+          class="hover:color-blue"
+          >{{ subject.name_cn || subject.name }}</a
+        >
       </CardTitle>
       <CardDescription class="mt-2">
         <span>Bgm ID: </span>
-        <a :href="`https://bgm.tv/subject/${subject.id}`" class="hover:color-blue">{{
-          subject.id
-        }}</a>
+        <a
+          :href="`https://bgm.tv/subject/${subject.id}`"
+          target="_blank"
+          class="hover:color-blue"
+          >{{ subject.id }}</a
+        >
       </CardDescription>
     </CardHeader>
     <CardContent class="flex gap-4">
