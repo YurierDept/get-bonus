@@ -73,7 +73,7 @@ async function copyDescription() {
 
 <template>
   <li class="flex gap-4 mt-4">
-    <NuxtImg class="max-w-36" :src="data.image" />
+    <NuxtImg class="max-w-36" :src="data.image" :placeholder="144" />
     <div class="grid grid-rows-[1fr_auto] gap-2">
       <p class="text-3.5 whitespace-pre-line">{{ data.description }}</p>
       <div class="flex gap-4">
