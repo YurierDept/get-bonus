@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
-import type { SubjectInformation } from 'bgmc';
+import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
 
 import { Loader2, Search } from 'lucide-vue-next';
 
@@ -13,9 +13,20 @@ const { data } = await useAsyncData('search_results', async () =>
     : undefined
 );
 
-type FullDetail = { details: Record<string, Detail[]> | null; bgm: SubjectInformation | null };
+type FullDetail = {
+  details: Record<string, Detail[]> | null;
+  subject: SubjectInformation | null;
+  persons: Array<SubjectPersons[0] & { detail: PersonInformation }> | null;
+};
+
 const details = ref<FullDetail | null>(
-  data.value ? { details: data.value[0].details, bgm: data.value[1].detail } : null
+  data.value
+    ? {
+        details: data.value[0].details,
+        subject: data.value[1]?.subject,
+        persons: data.value[1]?.persons
+      }
+    : null
 );
 const foundNums = computed(() => {
   return Object.entries(details.value?.details ?? {}).reduce((acc, t) => acc + t[1].length, 0);
@@ -38,9 +49,9 @@ const search = async (input: string) => {
       $fetch(`/api/search/${input}`, {}),
       $fetch(`/api/bgm/${input}`, {})
     ]);
-    details.value = { details: resp1.details, bgm: resp2.detail };
+    details.value = { details: resp1.details, subject: resp2.subject, persons: resp2.persons };
   } catch {
-    details.value = { details: null, bgm: null };
+    details.value = { details: null, subject: null, persons: null };
   } finally {
     isSearching.value = false;
   }
@@ -97,8 +108,12 @@ const random = (arr: string[]) => {
     </div>
     <div class="w-full mt-6 pb-16">
       <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
-      <div v-else-if="details?.details || details?.bgm">
-        <BangumiResult v-if="details.bgm" :subject="details.bgm"></BangumiResult>
+      <div v-else-if="details?.details || details?.subject">
+        <BangumiResult
+          v-if="details.subject"
+          :subject="details.subject"
+          :persons="details.persons"
+        ></BangumiResult>
         <SearchResult
           v-if="details?.details && foundNums > 0"
           :details="details.details"
