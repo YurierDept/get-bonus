@@ -33,7 +33,7 @@ function inferTwitter(person: PersonInformation) {
       <div><NuxtImg class="max-w-36" :src="subject.images.large" /></div>
       <div>
         <div class="text-sm">{{ subject.summary }}</div>
-        <div class="mt-4">
+        <div class="mt-4 space-y-1">
           <div v-for="person in persons">
             <span class="font-bold mr-2">{{ person.relation }}</span>
             <span>{{ person.name }}</span>

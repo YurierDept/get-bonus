@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
   });
 
   if (resp.list && resp.list.length > 0) {
+    // 获取第一个搜索结果
     const found = resp.list[0];
 
     if (found.id) {
