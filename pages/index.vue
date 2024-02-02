@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
+import type { SubjectInformation } from 'bgmc';
 
 import { Loader2, Search } from 'lucide-vue-next';
 
@@ -7,12 +8,17 @@ const route = useRoute();
 const router = useRouter();
 
 const { data } = await useAsyncData('search_results', async () =>
-  route.query.q ? $fetch(`/api/search/${route.query.q}`) : undefined
+  route.query.q
+    ? Promise.all([$fetch(`/api/search/${route.query.q}`), $fetch(`/api/bgm/${route.query.q}`, {})])
+    : undefined
 );
 
-const details = ref<Record<string, Detail[]> | null>(data.value?.details ?? null);
+type FullDetail = { details: Record<string, Detail[]> | null; bgm: SubjectInformation | null };
+const details = ref<FullDetail | null>(
+  data.value ? { details: data.value[0].details, bgm: data.value[1].detail } : null
+);
 const foundNums = computed(() => {
-  return Object.entries(details.value ?? {}).reduce((acc, t) => acc + t[1].length, 0);
+  return Object.entries(details.value?.details ?? {}).reduce((acc, t) => acc + t[1].length, 0);
 });
 
 const searchInput = ref('');
@@ -28,10 +34,13 @@ const search = async (input: string) => {
 
   try {
     isSearching.value = true;
-    const resp = await $fetch(`/api/search/${input}`, {});
-    details.value = resp.details;
+    const [resp1, resp2] = await Promise.all([
+      $fetch(`/api/search/${input}`, {}),
+      $fetch(`/api/bgm/${input}`, {})
+    ]);
+    details.value = { details: resp1.details, bgm: resp2.detail };
   } catch {
-    details.value = {};
+    details.value = { details: null, bgm: null };
   } finally {
     isSearching.value = false;
   }
@@ -88,7 +97,13 @@ const random = (arr: string[]) => {
     </div>
     <div class="w-full mt-6 pb-16">
       <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
-      <SearchResult v-else-if="details && foundNums > 0" :details="details"></SearchResult>
+      <div v-else-if="details?.details || details?.bgm">
+        <BangumiResult v-if="details.bgm" :subject="details.bgm"></BangumiResult>
+        <SearchResult
+          v-if="details?.details && foundNums > 0"
+          :details="details.details"
+        ></SearchResult>
+      </div>
       <div v-else-if="details && foundNums === 0" class="flex items-center justify-center">
         <span class="text-2xl font-bold">未找到商品</span>
       </div>
