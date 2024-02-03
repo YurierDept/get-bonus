@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   css: ['@unocss/reset/tailwind.css'],
   app: {
     head: {
-      title: '特典搜索 | 百合研社团',
+      title: '百合花船·特典搜索',
       viewport: 'width=device-width,initial-scale=1,viewport-fit=cover',
       htmlAttrs: {
         lang: 'zh-CN'

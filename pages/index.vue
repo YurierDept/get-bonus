@@ -111,7 +111,7 @@ const random = (arr: string[]) => {
 <template>
   <div class="main">
     <div class="mt-10 select-none cursor-pointer" @click="resetSearch">
-      <span class="text-4xl font-bold">特典搜索</span>
+      <span class="text-4xl font-bold">百合花船·特典搜索</span>
     </div>
     <div class="mt-8 flex gap-4">
       <Input v-model="searchInput" @keydown.enter="search(searchInput)"></Input>
@@ -149,8 +149,8 @@ const random = (arr: string[]) => {
             等商家网站检索<span font-bold>商品</span>和对应<span font-bold>特典</span>。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            本项目主要由 <span font-bold>Yurier Dev</span> 开发，且在
-            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub 开源</a>。
+            本项目已在 <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub</a> 开源。
+            Proudly Developed by <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>
           </p>
           <ClientOnly>
             <p>

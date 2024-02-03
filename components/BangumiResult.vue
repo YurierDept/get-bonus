@@ -10,7 +10,7 @@ const props = defineProps<{
 
 function inferTwitter(person: PersonInformation) {
   const twitter = person.infobox?.filter(
-    (ib) => ib.key === '推特' || (ib.key as string).toLowerCase() === 'twitter'
+    (ib) => ib.key === 'X (Twitter)' || (ib.key as string).toLowerCase() === 'twitter'
   );
   const name = twitter?.[0]?.value as string | undefined;
   if (!name) return undefined;
