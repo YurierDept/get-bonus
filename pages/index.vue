@@ -93,7 +93,8 @@ const examples = [
   '週に一度クラスメイトを買う話',
   '星屑テレパス',
   'きみが死ぬまで恋をしたい',
-  'このはな綺譚'
+  'このはな綺譚',
+  'リコリス・リコイル'
 ];
 const random = (arr: string[]) => {
   const result = [];
@@ -114,7 +115,11 @@ const random = (arr: string[]) => {
       <span class="text-4xl font-bold">百合花船 · 特典搜索</span>
     </div>
     <div class="mt-8 flex gap-4">
-      <Input v-model="searchInput" @keydown.enter="search(searchInput)" placeholder="请输入作品的日文名称"></Input>
+      <Input
+        v-model="searchInput"
+        @keydown.enter="search(searchInput)"
+        placeholder="请输入作品的日文名称"
+      ></Input>
       <Button @click="search(searchInput)" :disabled="isSearching">
         <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
         <Search v-else class="w-4 h-4 mr-2"></Search>
