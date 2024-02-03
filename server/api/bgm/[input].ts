@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
         client.subjectPersons(foundId)
       ]);
 
-      const filterRelation = ['作者', '插图', '出版社', '连载杂志', '文库'];
+      const filterRelation = ['作者', '插图', '作画', '出版社', '连载杂志', '文库'];
       const detailedPersons = await Promise.all(
         persons
           .filter((person) => filterRelation.includes(person.relation))
