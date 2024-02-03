@@ -109,7 +109,7 @@ const random = (arr: string[]) => {
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
             本项目主要由 <span font-bold>Yurier Dev</span> 开发，且开源。
-            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">Github Repo</a>
+            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub Repo</a>
           </p>
           <p>
             试一试吧：
