@@ -41,6 +41,10 @@ function inferTwitter(person: PersonInformation) {
   if (name.startsWith(twitterURL)) {
     return '@' + name.slice(twitterURL.length);
   }
+  const xURL = `https://x.com/`;
+  if (name.startsWith(xURL)) {
+    return '@' + name.slice(xURL.length);
+  }
   if (name.startsWith('@')) {
     return name;
   }
@@ -120,7 +124,7 @@ function inferTwitter(person: PersonInformation) {
           class="text-blue-400 hover:text-blue-500 hover:underline"
           >Bangumi 番组计划</a
         >
-        的搜索结果中的第一条结果。
+        搜索结果第一页中的标题最相似的一个条目。
       </div>
       <div>
         需要进一步搜索，<a
