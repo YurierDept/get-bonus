@@ -1,9 +1,10 @@
-import type { Detail, SearchResult, SearchOptions } from '../types';
+import type { Detail, SearchResult, SearchOptions, DetailItem } from '../types';
 
 import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Gamers extends Provider {
   constructor() {
@@ -39,21 +40,19 @@ export class Gamers extends Provider {
     const doc = dom.window.document;
 
     const title = doc.querySelector('.ttl_style01');
-    
-    const price = resolvePrice(doc
-      .querySelector('.item_detail_price .price')
-      ?.textContent?.trim());
-    const date = resolveDate(doc
-      .querySelector('.item_detail_release .release')
-      ?.textContent?.trim());
-    
+
+    const price = resolvePrice(doc.querySelector('.item_detail_price .price')?.textContent?.trim());
+    const date = resolveDate(
+      doc.querySelector('.item_detail_release .release')?.textContent?.trim()
+    );
+
     const tokutens = doc.querySelectorAll('#tokuten > div[class]');
     const items = [...tokutens].map((item) => {
       const img = item.querySelector('img') as HTMLImageElement;
       const info = item.querySelector('.tokuten_name');
-      return {
+      return <DetailItem>{
         image: img.src,
-        description: info?.textContent || ''
+        description: removeExtraSpaces(info?.textContent || '')
       };
     });
 
@@ -72,7 +71,6 @@ export class Gamers extends Provider {
  * Pattern: `2023/09/27`
  */
 function resolveDate(t?: string) {
-  console.log("gamers:"+t);
   if (!t) return undefined;
   const RE = /(\d+)\/(\d+)\/(\d+)/;
   const match = RE.exec(t);
@@ -86,7 +84,6 @@ function resolveDate(t?: string) {
  * Pattern: `990Yen（tax included）`
  */
 function resolvePrice(t?: string) {
-  console.log("gamers:"+t);
   if (!t) return undefined;
   const match = /([0-9,]+)/.exec(t);
   return match ? +match[1].replace(/,/g, '') : undefined;

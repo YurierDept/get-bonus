@@ -4,6 +4,7 @@ import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Melonbooks extends Provider {
   constructor() {
@@ -49,9 +50,9 @@ export class Melonbooks extends Provider {
     const items = [...privItems].map((item) => {
       const img = item.querySelector('.priv_img') as HTMLImageElement;
       const info = item.querySelector('.priv-item_info');
-      return {
+      return <DetailItem>{
         image: enforceHTTPS(img.src),
-        description: info?.textContent?.trim?.() || ''
+        description: removeExtraSpaces(info?.textContent?.trim?.() || '')
       };
     });
 
@@ -83,7 +84,6 @@ function resolveDate(t?: string) {
  * Pattern: `¥2,970`
  */
 function resolvePrice(t?: string) {
-  console.log(t);
   if (!t) return undefined;
   const match = /([0-9,]+)/.exec(t);
   return match ? +match[1].replace(/,/g, '') : undefined;

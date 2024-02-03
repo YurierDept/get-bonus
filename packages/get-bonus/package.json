@@ -1,8 +1,10 @@
 {
   "name": "get-bonus",
   "version": "0.0.1",
-  "description": "",
-  "keywords": [],
+  "description": "一键搜索同一商品在多个商家的特典",
+  "keywords": [
+    "scraper"
+  ],
   "homepage": "https://github.com/yjl9903/get-bonus#readme",
   "bugs": {
     "url": "https://github.com/yjl9903/get-bonus/issues"
@@ -12,7 +14,7 @@
     "url": "git+https://github.com/yjl9903/get-bonus.git"
   },
   "license": "MIT",
-  "author": "[username]",
+  "author": "Yurier Dev",
   "sideEffects": false,
   "exports": {
     ".": {

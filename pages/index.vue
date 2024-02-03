@@ -1,26 +1,48 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
+import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
 
 import { Loader2, Search } from 'lucide-vue-next';
-
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 
 const route = useRoute();
 const router = useRouter();
 
 const { data } = await useAsyncData('search_results', async () =>
-  route.query.q ? $fetch(`/api/search/${route.query.q}`) : undefined
+  route.query.q
+    ? Promise.all([$fetch(`/api/search/${route.query.q}`), $fetch(`/api/bgm/${route.query.q}`, {})])
+    : undefined
 );
 
-const details = ref<Record<string, Detail[]> | null>(data.value?.details ?? null);
-const foundNums = computed(() => {
-  return Object.entries(details.value ?? {}).reduce((acc, t) => acc + t[1].length, 0);
-});
+type FullDetail = {
+  details: Record<string, Detail[]> | null;
+  subject: SubjectInformation | null;
+  persons: Array<SubjectPersons[0] & { detail: PersonInformation }> | null;
+};
 
+const details = ref<FullDetail | null>(
+  data.value
+    ? {
+        details: data.value[0].details,
+        subject: data.value[1]?.subject,
+        persons: data.value[1]?.persons
+      }
+    : null
+);
+
+let abort: AbortController | null = null;
 const searchInput = ref('');
 const isSearching = ref(false);
+const resetSearch = () => {
+  if (!abort && !searchInput.value && !details.value) return;
+  abort?.abort();
+  searchInput.value = '';
+  isSearching.value = false;
+  details.value = null;
+  router.push({
+    path: route.path,
+    query: { q: '' }
+  });
+};
 const search = async (input: string) => {
   if (isSearching.value) return;
   if (!input) return;
@@ -31,12 +53,17 @@ const search = async (input: string) => {
   });
 
   try {
+    abort = new AbortController();
     isSearching.value = true;
-    const resp = await $fetch(`/api/search/${input}`, {});
-    details.value = resp.details;
+    const [resp1, resp2] = await Promise.all([
+      $fetch(`/api/search/${input}`, { signal: abort.signal }),
+      $fetch(`/api/bgm/${input}`, { signal: abort.signal })
+    ]);
+    details.value = { details: resp1.details, subject: resp2.subject, persons: resp2.persons };
   } catch {
-    details.value = {};
+    details.value = { details: null, subject: null, persons: null };
   } finally {
+    abort = null;
     isSearching.value = false;
   }
 };
@@ -56,6 +83,10 @@ watch(
     }
   }
 );
+
+const foundNums = computed(() => {
+  return Object.entries(details.value?.details ?? {}).reduce((acc, t) => acc + t[1].length, 0);
+});
 
 const randomNum = 2;
 const examples = [
@@ -79,8 +110,8 @@ const random = (arr: string[]) => {
 
 <template>
   <div class="main">
-    <div class="mt-10 select-none">
-      <span class="text-4xl font-bold">特典获取</span>
+    <div class="mt-10 select-none cursor-pointer" @click="resetSearch">
+      <span class="text-4xl font-bold">特典搜索</span>
     </div>
     <div class="mt-8 flex gap-4">
       <Input v-model="searchInput" @keydown.enter="search(searchInput)"></Input>
@@ -92,7 +123,17 @@ const random = (arr: string[]) => {
     </div>
     <div class="w-full mt-6 pb-16">
       <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
-      <SearchResult v-else-if="details && foundNums > 0" :details="details"></SearchResult>
+      <div v-else-if="details?.details || details?.subject">
+        <BangumiResult
+          v-if="details.subject"
+          :subject="details.subject"
+          :persons="details.persons"
+        ></BangumiResult>
+        <SearchResult
+          v-if="details?.details && foundNums > 0"
+          :details="details.details"
+        ></SearchResult>
+      </div>
       <div v-else-if="details && foundNums === 0" class="flex items-center justify-center">
         <span class="text-2xl font-bold">未找到商品</span>
       </div>
@@ -108,22 +149,22 @@ const random = (arr: string[]) => {
             等商家网站检索<span font-bold>商品</span>和对应<span font-bold>特典</span>。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            本项目主要由 <span font-bold>Yurier Dev</span> 开发，且开源。
-            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub Repo</a>
+            本项目主要由 <span font-bold>Yurier Dev</span> 开发，且在
+            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub 开源</a>。
           </p>
-          <p>
-            试一试吧：
-            <ClientOnly
-              ><span v-for="(title, idx) in random(examples)" :key="title"
+          <ClientOnly>
+            <p>
+              试一试吧：
+              <span v-for="(title, idx) in random(examples)" :key="title"
                 >{{ idx > 0 ? '、' : ''
                 }}<span
                   class="color-blue-400 hover:color-blue-500 cursor-pointer"
                   @click="search(title)"
                   >{{ title }}</span
                 ></span
-              ></ClientOnly
-            >
-          </p>
+              >
+            </p>
+          </ClientOnly>
         </div>
       </div>
     </div>

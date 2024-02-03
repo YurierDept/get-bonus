@@ -1,9 +1,10 @@
-import type { Detail, SearchResult, SearchOptions } from '../types';
+import type { Detail, SearchResult, SearchOptions, DetailItem } from '../types';
 
 import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
+import { removeExtraSpaces } from '../utils';
 
 export class Mangaoh extends Provider {
   constructor() {
@@ -44,13 +45,18 @@ export class Mangaoh extends Provider {
     const date = doc
       .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(3) > td:nth-child(2)')
       ?.textContent?.trim();
-    const price = resolvePrice(doc
-      .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(2) > td:nth-child(2)')
-      ?.textContent?.trim());
-    const items = [...imgs].map((img, i) => ({
-      image: (img as HTMLImageElement).src,
-      description: descs?.[i] || ''
-    }));
+    const price = resolvePrice(
+      doc
+        .querySelector('.spec-table > tbody:nth-child(1) > tr:nth-last-child(2) > td:nth-child(2)')
+        ?.textContent?.trim()
+    );
+    const items = [...imgs].map(
+      (img, i) =>
+        <DetailItem>{
+          image: (img as HTMLImageElement).src,
+          description: removeExtraSpaces(descs?.[i] || '')
+        }
+    );
 
     return {
       provider: this.id,
@@ -67,7 +73,7 @@ export class Mangaoh extends Provider {
  * Pattern: `3,740円(本体3,400円) `
  */
 function resolvePrice(t?: string) {
-  console.log(t);
+  t;
   if (!t) return undefined;
   const match = /([0-9,]+)/.exec(t);
   return match ? +match[1].replace(/,/g, '') : undefined;
