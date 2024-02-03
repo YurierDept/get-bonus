@@ -1,4 +1,5 @@
 import { BgmClient, type Search } from 'bgmc';
+import { distance } from 'fastest-levenshtein';
 
 const client = new BgmClient(fetch);
 
@@ -17,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
   if (resp.list && resp.list.length > 0) {
     // 获取第一个搜索结果
-    const foundId = await inferSubject(resp.list);
+    const foundId = await inferSubject(input, resp.list);
 
     if (foundId) {
       const [subject, persons] = await Promise.all([
@@ -48,12 +49,39 @@ export default defineEventHandler(async (event) => {
 });
 
 /**
+ * 使用编辑距离 (levenshtein distance)，选择一个标题最相似的 subject
+ */
+function selectSubject(input: string, subjects: Search['list']) {
+  const result1 = closest(input, subjects!, (subject) => subject.name);
+  const result2 = closest(input, subjects!, (subject) => subject.name_cn);
+
+  return distance(input, result1.name ?? '') <= distance(input, result2.name_cn ?? '')
+    ? result1
+    : result2;
+
+  function closest<T>(str: string, arr: T[], key: (value: T) => string | null | undefined) {
+    let min_distance = Infinity;
+    let min_index = 0;
+    for (let i = 0; i < arr.length; i++) {
+      const name = key(arr[i]);
+      if (name === undefined || name === null) continue;
+      const dist = distance(str, name);
+      if (dist < min_distance) {
+        min_distance = dist;
+        min_index = i;
+      }
+    }
+    return arr[min_index];
+  }
+}
+
+/**
  * 1. 使用搜索结果的第一个
  * 2. 如果它是系列中的某一部，则使用系列
  */
-async function inferSubject(subjects: Search['list']) {
+async function inferSubject(input: string, subjects: Search['list']) {
   if (!subjects) return undefined;
-  const first = subjects[0];
+  const first = selectSubject(input, subjects);
   if (!first || !first.id) return undefined;
 
   const related = await client.subjectRelated(first.id);
