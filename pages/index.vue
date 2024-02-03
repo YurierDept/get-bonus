@@ -30,7 +30,7 @@ const details = ref<FullDetail | null>(
 );
 
 let abort: AbortController | null = null;
-const searchInput = ref('');
+const searchInput = ref((route.query.q as string | null) || '');
 const isSearching = ref(false);
 const resetSearch = () => {
   if (!abort && !searchInput.value && !details.value) return;
@@ -126,6 +126,7 @@ const random = (arr: string[]) => {
       <div v-else-if="details?.details || details?.subject">
         <BangumiResult
           v-if="details.subject"
+          :input="searchInput"
           :subject="details.subject"
           :persons="details.persons"
         ></BangumiResult>
@@ -152,8 +153,10 @@ const random = (arr: string[]) => {
             请注意，您需要在搜索框输入作品的<span font-bold>日文名称</span>。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            本项目已在 <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub</a> 开源。
-            Proudly Developed by <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>
+            本项目已在
+            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub</a> 开源。
+            Proudly Developed by
+            <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>
           </p>
           <ClientOnly>
             <p>
@@ -164,7 +167,8 @@ const random = (arr: string[]) => {
                   class="color-blue-400 hover:color-blue-500 cursor-pointer"
                   @click="search(title)"
                   >{{ title }}</span
-                ></span>
+                ></span
+              >
             </p>
           </ClientOnly>
         </div>

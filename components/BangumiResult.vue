@@ -4,6 +4,7 @@ import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 
 const props = defineProps<{
+  input: string;
   subject: SubjectInformation;
   persons: Array<SubjectPersons[0] & { detail: PersonInformation }> | null;
 }>();
@@ -70,9 +71,34 @@ function inferTwitter(person: PersonInformation) {
         </div>
       </div>
     </CardContent>
-    <!-- <CardFooter class="flex justify-between px-6 pb-6">
-      <Button variant="outline"> Cancel </Button>
-      <Button>Deploy</Button>
-    </CardFooter> -->
+    <CardFooter class="flex flex-col items-start px-6 pt-4 pb-6 border-t text-sm space-y-1">
+      <div>
+        上述信息来自
+        <a
+          href="https://bgm.tv/"
+          target="_blank"
+          class="text-blue-400 hover:text-blue-500 hover:underline"
+          >Bangumi 番组计划</a
+        >。
+      </div>
+      <div>
+        因版面所限，仅展示在
+        <a
+          href="https://bgm.tv/"
+          target="_blank"
+          class="text-blue-400 hover:text-blue-500 hover:underline"
+          >Bangumi 番组计划</a
+        >
+        的搜索结果中的第一条结果。
+      </div>
+      <div>
+        需要进一步搜索，<a
+          :href="`https://bgm.tv/subject_search/${input}?cat=1`"
+          target="_blank"
+          class="text-blue-400 hover:text-blue-500 hover:underline"
+          >请点这里去 Bangumi 番组计划 搜索 →</a
+        >
+      </div>
+    </CardFooter>
   </Card>
 </template>
