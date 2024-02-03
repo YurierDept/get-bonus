@@ -30,7 +30,7 @@ const details = ref<FullDetail | null>(
 );
 
 let abort: AbortController | null = null;
-const searchInput = ref(route.query.q || '');
+const searchInput = ref((route.query.q as string | null) || '');
 const isSearching = ref(false);
 const resetSearch = () => {
   if (!abort && !searchInput.value && !details.value) return;
