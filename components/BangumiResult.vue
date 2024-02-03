@@ -31,8 +31,8 @@ function inferLink(person: PersonInformation) {
 }
 
 function inferTwitter(person: PersonInformation) {
-  const twitter = person.infobox?.filter(
-    (ib) => ib.key === 'X (Twitter)' || (ib.key as string).toLowerCase() === 'twitter'
+  const twitter = person.infobox?.filter((ib) =>
+    ['推特', 'X (Twitter)', 'Twitter'].includes(ib.key as string)
   );
   const name = twitter?.[0]?.value as string | undefined;
   if (!name) return undefined;
