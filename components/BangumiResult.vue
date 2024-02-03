@@ -3,11 +3,32 @@ import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 
+type PersonDetail = SubjectPersons[0] & { detail: PersonInformation };
+
 const props = defineProps<{
   input: string;
   subject: SubjectInformation;
-  persons: Array<SubjectPersons[0] & { detail: PersonInformation }> | null;
+  persons: PersonDetail[] | null;
 }>();
+
+const persons = computed(() => {
+  const raw = props.persons;
+  const info: Record<string, PersonDetail[]> = {};
+  for (const pair of raw ?? []) {
+    if (!info[pair.relation]) {
+      info[pair.relation] = [];
+    }
+    info[pair.relation].push(pair);
+  }
+  return Object.entries(info);
+});
+
+function inferLink(person: PersonInformation) {
+  const official = person.infobox?.filter((ib) =>
+    ['引用来源', '官方网站'].includes(ib.key as string)
+  );
+  return official?.[0]?.value as string | undefined;
+}
 
 function inferTwitter(person: PersonInformation) {
   const twitter = person.infobox?.filter(
@@ -53,20 +74,30 @@ function inferTwitter(person: PersonInformation) {
       <div><NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" /></div>
       <div>
         <div class="text-sm">{{ subject.summary }}</div>
-        <div class="mt-4 space-y-1">
-          <div v-for="person in persons">
-            <span class="font-bold mr-2">{{ person.relation }}</span>
-            <span>{{ person.name }}</span>
-            <a
-              v-if="inferTwitter(person.detail)"
-              class="ml-2 inline-block"
-              :href="`https://twitter.com/${inferTwitter(person.detail)?.slice(1)}`"
-              target="_blank"
-            >
-              <span class="text-blue-400 hover:text-blue-500">{{
-                inferTwitter(person.detail)
-              }}</span>
-            </a>
+        <div class="mt-6 space-y-1">
+          <div v-for="[relation, list] in persons" :key="relation">
+            <span class="font-bold mr-2">{{ relation }}</span>
+            <span v-for="(person, idx) in list">
+              <span v-if="idx > 0" class="select-none">, </span>
+              <a
+                v-if="inferLink(person.detail)"
+                :href="inferLink(person.detail)"
+                target="_blank"
+                class="hover:text-blue-500"
+                >{{ person.name }}</a
+              >
+              <span v-else>{{ person.name }}</span>
+              <a
+                v-if="inferTwitter(person.detail)"
+                class="ml-2 inline-block"
+                :href="`https://twitter.com/${inferTwitter(person.detail)?.slice(1)}`"
+                target="_blank"
+              >
+                <span class="text-blue-400 hover:text-blue-500">{{
+                  inferTwitter(person.detail)
+                }}</span>
+              </a>
+            </span>
           </div>
         </div>
       </div>
