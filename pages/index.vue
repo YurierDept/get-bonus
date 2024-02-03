@@ -114,7 +114,7 @@ const random = (arr: string[]) => {
       <span class="text-4xl font-bold">百合花船·特典搜索</span>
     </div>
     <div class="mt-8 flex gap-4">
-      <Input v-model="searchInput" @keydown.enter="search(searchInput)"></Input>
+      <Input v-model="searchInput" @keydown.enter="search(searchInput)" placeholder="请输入作品的日文名称"></Input>
       <Button @click="search(searchInput)" :disabled="isSearching">
         <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
         <Search v-else class="w-4 h-4 mr-2"></Search>
@@ -147,6 +147,9 @@ const random = (arr: string[]) => {
             <a href="https://shop.comiczin.jp" target="_blank">Comic Zin</a>、
             <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>
             等商家网站检索<span font-bold>商品</span>和对应<span font-bold>特典</span>。
+          </p>
+          <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
+            请注意，您需要在搜索框输入作品的<span font-bold>日文名称</span>。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
             本项目已在 <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub</a> 开源。
