@@ -7,7 +7,7 @@ import { Provider } from '../scraper';
 
 export class Toranoana extends Provider {
   constructor() {
-    super('toranoana', 'https://ecs.toranoana.jp');
+    super('虎穴', 'https://ecs.toranoana.jp');
   }
 
   async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {

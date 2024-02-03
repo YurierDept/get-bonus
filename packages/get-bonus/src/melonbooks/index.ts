@@ -8,7 +8,7 @@ import { removeExtraSpaces } from '../utils';
 
 export class Melonbooks extends Provider {
   constructor() {
-    super('melonbooks', 'https://www.melonbooks.co.jp');
+    super('Melonbooks', 'https://www.melonbooks.co.jp');
   }
 
   async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {

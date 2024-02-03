@@ -8,7 +8,7 @@ import { removeExtraSpaces } from '../utils';
 
 export class Animate extends Provider {
   constructor() {
-    super('animate', 'https://www.animate-onlineshop.jp');
+    super('Animate', 'https://www.animate-onlineshop.jp');
   }
 
   async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {

@@ -161,8 +161,7 @@ const random = (arr: string[]) => {
                   class="color-blue-400 hover:color-blue-500 cursor-pointer"
                   @click="search(title)"
                   >{{ title }}</span
-                ></span
-              >
+                ></span>
             </p>
           </ClientOnly>
         </div>

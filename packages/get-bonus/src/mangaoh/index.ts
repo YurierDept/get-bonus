@@ -8,7 +8,7 @@ import { removeExtraSpaces } from '../utils';
 
 export class Mangaoh extends Provider {
   constructor() {
-    super('mangaoh', 'https://www.mangaoh.co.jp');
+    super('漫画王', 'https://www.mangaoh.co.jp');
   }
 
   async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {

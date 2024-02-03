@@ -3,10 +3,10 @@ import { Scraper, Melonbooks, Animate, Mangaoh, Comiczin, Gamers, Toranoana } fr
 const providers = [
   new Melonbooks(),
   new Animate(),
-  new Mangaoh(),
-  new Comiczin(),
+  new Toranoana(),
   new Gamers(),
-  new Toranoana()
+  new Mangaoh(),
+  new Comiczin()
 ];
 
 export const scraper = new Scraper(...providers);

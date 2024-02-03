@@ -8,7 +8,7 @@ import { removeExtraSpaces } from '../utils';
 
 export class Gamers extends Provider {
   constructor() {
-    super('gamers', 'https://www.gamers.co.jp');
+    super('Gamers', 'https://www.gamers.co.jp');
   }
 
   async search(text: string, options: Partial<SearchOptions>): Promise<SearchResult[]> {
