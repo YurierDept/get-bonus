@@ -1,6 +1,6 @@
 {
   "name": "get-bonus",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "一键搜索同一商品在多个商家的特典",
   "keywords": [
     "scraper"
