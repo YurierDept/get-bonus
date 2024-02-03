@@ -74,7 +74,7 @@ function inferTwitter(person: PersonInformation) {
         >
       </CardDescription>
     </CardHeader>
-    <CardContent class="flex gap-4">
+    <CardContent class="flex gap-4 lt-md:flex-col">
       <div><NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" /></div>
       <div>
         <div class="text-sm">{{ subject.summary }}</div>
