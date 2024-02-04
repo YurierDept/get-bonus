@@ -5,13 +5,13 @@
   "keywords": [
     "scraper"
   ],
-  "homepage": "https://github.com/yjl9903/get-bonus#readme",
+  "homepage": "https://github.com/YurierDept/get-bonus#readme",
   "bugs": {
-    "url": "https://github.com/yjl9903/get-bonus/issues"
+    "url": "https://github.com/YurierDept/get-bonus/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yjl9903/get-bonus.git"
+    "url": "git+https://github.com/YurierDept/get-bonus.git"
   },
   "license": "MIT",
   "author": "Yurier Dev",

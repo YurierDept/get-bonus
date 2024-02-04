@@ -158,7 +158,7 @@ const random = (arr: string[]) => {
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
             本项目已在
-            <a href="https://github.com/yjl9903/get-bonus/" target="_blank">GitHub</a> 开源。
+            <a href="https://github.com/YurierDept/get-bonus/" target="_blank">GitHub</a> 开源。
             Proudly Developed by
             <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>
           </p>
