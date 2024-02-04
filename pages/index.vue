@@ -157,6 +157,9 @@ const random = (arr: string[]) => {
             请注意，您需要在搜索框输入作品的<span font-bold>日文名称</span>。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
+            程序尚在开发和完善当中，但部分功能已经可用。欢迎通过<a href="https://github.com/YurierDept/get-bonus/issues" target="_blank">提交issue</a>等方式反馈bug，以及提出意见与建议！
+          </p>
+          <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
             本项目已在
             <a href="https://github.com/YurierDept/get-bonus/" target="_blank">GitHub</a> 开源。
             Proudly Developed by
