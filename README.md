@@ -2,7 +2,8 @@
 
 一键搜索同一商品在多个商家的特典！「百合花船·特典搜索」可让用户快速从 Melonbooks、 Animate、 虎穴、 Gamers、 Comic Zin、 漫画王 等商家网站检索商品和对应特典。
 
-程序尚在开发和完善，但部分功能已经可用，欢迎提出意见与建议。
+程序尚在开发和完善当中，但部分功能已经可用。  
+普通用户已可试用（[get-bonus.yurier.net](get-bonus.yurier.net)！欢迎各位通过提交issue等方式反馈bug，以及提出意见与建议！
 
 本项目由 Yurier Dev 创建，以及做出主要贡献。
 
