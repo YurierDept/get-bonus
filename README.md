@@ -39,9 +39,9 @@ pnpm run dev
 Start the development server on `http://localhost:3000`. Ordinary users can use it directly at this time after ensuring that the network conditions are suitable (when running locally, content requests for merchant websites are issued by the computer running the program, not our server). Other developers can adjust the code and see the effects "in real time".
 
 ## 构建 / Build
-本程序是一个 Nuxt 3 应用程序。所以，需自行部署者，可参考 [Nuxt 的部署指南](https://nuxt.com/docs/getting-started/deployment)。总而言之，本程序支持借助 Node.js 在服务器上运行，也可以托管到主流的 Serverless 型的网站托管服务。
+本程序是一个 Nuxt 3 应用程序。所以，需自行部署者，可参考 [Nuxt 的部署指南](https://nuxt.com/docs/getting-started/deployment)。总而言之，本程序支持借助 Node.js 在服务器上运行，也可以托管到主流的 Serverless 型的网站托管服务。我们自己选择了后者，可以参考 /.github 的相关 GitHub Actions 流程文件。
 
-This program is a Nuxt 3 application. Therefore, those who need to deploy by themselves can refer to [Nuxt's deployment guide](https://nuxt.com/docs/getting-started/deployment). All in all, this program supports running on the server with Node.js, and can also be hosted on mainstream Serverless website hosting services.
+This program is a Nuxt 3 application. Therefore, those who need to deploy by themselves can refer to [Nuxt's deployment guide](https://nuxt.com/docs/getting-started/deployment). All in all, this program supports running on the server with Node.js, and can also be hosted on mainstream Serverless website hosting services. We chose the latter ourselves, you can refer to the related GitHub Actions process files in /.github.
 
 ```bash
 # 构建生产用程序 / Build the application for production
