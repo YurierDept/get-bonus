@@ -3,7 +3,7 @@
 一键搜索同一商品在多个商家的特典！「百合花船·特典搜索」可让用户快速从 Melonbooks、 Animate、 虎穴、 Gamers、 Comic Zin、 漫画王 等商家网站检索商品和对应特典。
 
 程序尚在开发和完善当中，但部分功能已经可用。  
-普通用户已可试用（[get-bonus.yurier.net](get-bonus.yurier.net)）！欢迎各位通过提交issue等方式反馈bug，以及提出意见与建议！
+普通用户已可试用（[get-bonus.yurier.net](https://get-bonus.yurier.net)）！欢迎各位通过提交issue等方式反馈bug，以及提出意见与建议！
 
 本项目由 Yurier Dev 创建，以及做出主要贡献。
 
@@ -15,8 +15,8 @@
 - TypeScript
 
 ## 本地运行 或 开发测试 / Run locally or Development Test
-请确保已安装 [git](git-scm.com) 和 [pnpm](pnpm.io)。  
-Please make sure [git](git-scm.com) and [pnpm](pnpm.io) are installed.
+请确保已安装 [git] 和 [pnpm]。  
+Please make sure [git] and [pnpm] are installed.
 
 1. 对本项目进行 git clone。（请注意，git clone下来的程序并不会自动更新，如需长期做本地运行或自行部署，请自行做定期或不定期的git clone，以获取最新版本）
 1. Perform git clone on this project. (Please note that the program downloaded by git clone will not be automatically updated. If you need to run it locally for a long time or deploy it yourself, please do regular or irregular git clone yourself to get the latest version)
@@ -63,3 +63,6 @@ pnpm run preview
 本程序附带 MIT License 开源。使用本程序及其源代码时，请遵守 MIT License。
 
 This program comes with the MIT License.
+
+[git]: https://git-scm.com
+[pnpm]: https://pnpm.io
