@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
-
 import { Loader2, Search } from 'lucide-vue-next';
 
 const route = useRoute();
