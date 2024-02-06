@@ -12,9 +12,9 @@ const baseUrl = computed(() => {
   return new URL(props.data.url).origin;
 });
 
-async function copyTitle() {
-  await navigator.clipboard.writeText(props.data.title);
-  toast.success(`复制标题成功`, {});
+async function copyUrl() {
+  await navigator.clipboard.writeText(props.data.url);
+  toast.success(`复制商家链接成功`, {});
 }
 </script>
 
@@ -24,8 +24,8 @@ async function copyTitle() {
       <nuxt-link class="font-bold text-5 hover:color-blue" :to="data.url" target="_blank">
         <span>{{ data.title }}</span>
       </nuxt-link>
-      <Button variant="ghost" size="icon" class="ml-2" @click="copyTitle">
-        <Copy class="w-4 h-4" />
+      <Button @click="copyUrl" variant="secondary" size="sm" margin-left="3px" class="ml-3 mt-3">
+        <Copy class="w-4 h-4 mr-2"></Copy>复制商家链接
       </Button>
     </span>
     <span class="mt-2 flex items-center gap-2">
