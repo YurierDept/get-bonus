@@ -6,6 +6,7 @@ import { toast } from 'vue-sonner';
 import { Download, Copy, ClipboardCopy } from 'lucide-vue-next';
 
 const props = defineProps<{
+  provider: string;
   title: string;
   index: number;
   data: DetailItem;
@@ -23,7 +24,7 @@ async function downloadImage() {
     // 创建 a 标签
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${props.title}_${props.index}`;
+    a.download = `${props.title}_${props.provider}_${props.index}`;
     a.click();
 
     // 清理
