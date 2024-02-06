@@ -117,13 +117,28 @@ const random = (arr: string[]) => {
       <Input
         v-model="searchInput"
         @keydown.enter="search(searchInput)"
-        placeholder="请输入作品的日文名称"
+        placeholder="在使用前，请注意查看下方的使用说明"
       ></Input>
       <Button @click="search(searchInput)" :disabled="isSearching">
         <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
         <Search v-else class="w-4 h-4 mr-2"></Search>
         <span>搜索</span>
       </Button>
+    </div>
+    <div class="mt-4 flex gap-4">
+      <ClientOnly>
+            <p>
+              试一试吧：
+              <span v-for="(title, idx) in random(examples)" :key="title"
+                >{{ idx > 0 ? '、' : ''
+                }}<span
+                  class="color-blue-400 hover:color-blue-500 cursor-pointer"
+                  @click="search(title)"
+                  >{{ title }}</span
+                ></span
+              >
+            </p>
+      </ClientOnly>
     </div>
     <div class="w-full mt-6 pb-16">
       <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
@@ -142,42 +157,31 @@ const random = (arr: string[]) => {
       <div v-else-if="details && foundNums === 0" class="flex items-center justify-center">
         <span class="text-2xl font-bold">未找到商品</span>
       </div>
-      <div v-else class="border-t">
-        <div class="mt-6 rounded-4 p-6 b-1 space-y-3 text-xl">
+      <div v-else>
+        <div class="mt-6 rounded-4 p-6 b-1 space-y-3">
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            快速从 <a href="https://www.melonbooks.co.jp" target="_blank">Melonbooks</a>、
+            <span class="font-bold">尚在开发，现开放试用。</span>反馈 Bug 与 提出意见与建议：<a href="https://github.com/YurierDept/get-bonus/issues" target="_blank">提交 Issue</a> 或 <a href="mailto:harico@yurier.net" target="_blank">发邮件给主编</a>
+            <br/>
+            <span class="font-bold">使用说明：</span><br/>
+            <span class="font-bold">1.</span> 输入商品（书籍等）的日文标题，以查询商品在各商家的商品及特典信息，现支持<a href="https://www.melonbooks.co.jp" target="_blank">Melonbooks</a>、
             <a href="https://www.animate.co.jp/">Animate</a>、
             <a href="https://ecs.toranoana.jp" target="_blank">虎穴</a>、
             <a href="https://www.gamers.co.jp" target="_blank">Gamers</a>、
             <a href="https://shop.comiczin.jp" target="_blank">Comic Zin</a>、
-            <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>
-            等商家网站检索<span font-bold>商品</span>和对应<span font-bold>特典</span>。
+            <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>。
+            <br/>
+            <span class="font-bold">2. </span>输入作品的中文译名（不能是简称），以查询作品的日文标题并复制。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            请注意，您需要在搜索框输入作品的<span font-bold>日文名称</span>。
-          </p>
-          <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            程序尚在开发和完善当中，但部分功能已经可用。欢迎通过<a href="https://github.com/YurierDept/get-bonus/issues" target="_blank">提交issue</a>等方式反馈bug，以及提出意见与建议！
-          </p>
-          <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
+          推荐使用 Chrome / Edge / Firefox / Safari 等浏览器访问。个别功能在内核较旧的浏览器（比如部分 由中国大陆的公司开发 的 App 或浏览器）可能无法按预期运行。
+          <br/>
+          所有图片仅为展示与传达信息，其版权均归原作者；搜索结果与提示仅供参考，请以商家分发特典的实际策略与结果为准。
+          <br/>
             本项目已在
             <a href="https://github.com/YurierDept/get-bonus/" target="_blank">GitHub</a> 开源。
             Proudly Developed by
-            <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>
+            <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>.
           </p>
-          <ClientOnly>
-            <p>
-              试一试吧：
-              <span v-for="(title, idx) in random(examples)" :key="title"
-                >{{ idx > 0 ? '、' : ''
-                }}<span
-                  class="color-blue-400 hover:color-blue-500 cursor-pointer"
-                  @click="search(title)"
-                  >{{ title }}</span
-                ></span
-              >
-            </p>
-          </ClientOnly>
         </div>
       </div>
     </div>
