@@ -207,12 +207,16 @@ const random = (arr: string[]) => {
             <a href="https://shop.comiczin.jp" target="_blank">Comic Zin</a>、
             <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>。
             <br/>
+            想搜索书籍的指定卷数时，可用「作品日文标题+空格+卷数半角数字」的格式搜索，如「このはな綺譚 15」；不要输入全角数字或带圆圈的数字，数字后不必加上 卷/巻 。
+            <br/>
             <span class="font-bold">2. </span>输入作品的<span class="font-bold">中文译名</span> （不能是简称），以查询作品的<span class="font-bold">原文（例如：日文）标题</span>并复制。
           </p>
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
           推荐使用 Chrome / Edge / Firefox / Safari 等浏览器访问。个别功能在内核较旧的浏览器（比如部分 由中国大陆的公司开发 的 App 或浏览器）可能无法按预期运行。
           <br/>
           所有图片仅为展示与传达信息，其版权均归原作者；搜索结果与提示仅供参考，请以商家分发特典的实际策略与结果为准。
+          <br/>
+          本程序在搜索时（除「试一试吧」模块）不可能也不会只展现百合作品（百合作品繁多，每人的标准也不同），请按需搜索具体作品。
           <br/>
             本项目已在
             <a href="https://github.com/YurierDept/get-bonus/" target="_blank">GitHub</a> 开源。
