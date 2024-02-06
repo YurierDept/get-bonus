@@ -3,6 +3,9 @@ import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 
+import { toast } from 'vue-sonner';
+import { ClipboardCopy } from 'lucide-vue-next';
+
 type PersonDetail = SubjectPersons[0] & { detail: PersonInformation };
 
 const props = defineProps<{
@@ -50,6 +53,11 @@ function inferTwitter(person: PersonInformation) {
   }
   return '@' + name;
 }
+
+async function copyOriginTitle() {
+  await navigator.clipboard.writeText(props.subject.name);
+  toast.success(`复制原文标题成功`, {});
+}
 </script>
 
 <template>
@@ -59,13 +67,16 @@ function inferTwitter(person: PersonInformation) {
         <a :href="`https://bgm.tv/subject/${subject.id}`" target="_blank" class="hover:color-blue">
           <span v-if="subject.name_cn && subject.name"
             ><span>{{ subject.name_cn }}</span
-            ><span class="inline-block ml-2 font-normal text-base">{{ subject.name }}</span></span
+            ><span class="inline-block ml-3 font-normal text-base">原文标题：{{ subject.name }}</span></span
           >
           <span v-else>{{ subject.name }}</span>
         </a>
+        <Button @click="copyOriginTitle" variant="secondary" size="sm" margin-left="3px" class="ml-3 mt-3"
+          ><ClipboardCopy class="w-4 h-4 mr-2"  ></ClipboardCopy>复制原文标题</Button
+        >
       </CardTitle>
       <CardDescription class="mt-2">
-        <span>Bgm ID: </span>
+        <span>Bangumi ID: </span>
         <a
           :href="`https://bgm.tv/subject/${subject.id}`"
           target="_blank"
