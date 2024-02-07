@@ -14,4 +14,6 @@ const printBuildInfo = () => {
   console.groupEnd();
 };
 
-printBuildInfo();
+if (!import.meta.env.SSR) {
+  printBuildInfo();
+}
