@@ -10,7 +10,7 @@ import { Toaster } from '@/components/ui/sonner';
     'https://www.clarity.ms/tag/' + i; y = l.getElementsByTagName(r)[0];
     y.parentNode.insertBefore(t, y); })(window, document, 'clarity', 'script', 'kw32lgez2o');
   </Script>
-  <Toaster />
+  <Toaster richColors position="top-center"/>
   <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtLoadingIndicator />
