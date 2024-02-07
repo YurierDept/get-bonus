@@ -117,26 +117,27 @@ const random = (arr: string[]) => {
 <template>
   <div class="main">
     <div class="mt-10 select-none cursor-pointer" @click="resetSearch">
-      <span class="text-4xl title-font" color="#45c2ff">百合花船·特典搜索</span><sup> Beta</sup>
+      <span class="text-4xl title-font" color="#45c2ff">百合花船·特典搜索</span>
+      <Badge variant="outline" class="select-none">Beta</Badge>
     </div>
     <div class="mt-8 flex gap-4">
       <Input
         v-model="searchInput"
         @keydown.enter="search(searchInput)"
-        placeholder="在搜索前，请注意查看使用说明"
+        placeholder="在搜索前，请注意查看首页的各项说明"
       ></Input>
       <Button @click="search(searchInput)" :disabled="isSearching">
         <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
         <Search v-else class="w-4 h-4 mr-2"></Search>
-        <span>搜索</span>
+        <span class="title-font">搜索</span>
       </Button>
     </div>
     <div class="mt-4 flex gap-4">
       <ClientOnly>
         <p>
-          试一试吧：
+          <Badge variant="outline" class="select-none">试一试吧</Badge>&nbsp;
           <span v-for="(title, idx) in random(examples)" :key="title"
-            >{{ idx > 0 ? '、' : ''
+            >{{ idx > 0 ? '&nbsp;|&nbsp; ' : ''
             }}<span
               class="color-blue-400 hover:color-blue-500 cursor-pointer"
               @click="search(title)"
@@ -224,49 +225,61 @@ const random = (arr: string[]) => {
         给开发者，开发者会协助解决。
       </div>
       <div v-else>
-        <div class="mt-6 rounded-4 p-6 b-1 space-y-3">
+        <div class="mt-6 rounded-4 p-6 b-1 space-y-3" line-height="7">
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            <span class="font-bold">尚在开发，现开放试用。</span>反馈 Bug 与 提出意见与建议：<a
-              href="https://github.com/YurierDept/get-bonus/issues"
-              target="_blank"
-              class="color-blue"
-              >提交 Issue</a
-            >
-            或 <a href="mailto:harico@yurier.net" target="_blank">发邮件给主编</a>
+            <Badge variant="outline" class="select-none">使用方法</Badge> 
+            <span class="font-bold"> 1. 欲查询商品在各商家的商品及特典信息，请输入</span> 
+            商品（书籍等）的
+            <span class="font-bold">原文标题</span>（例如：星屑テレパス）；如果是书籍，
+            也可以加上卷数（需为半角数字，不要输入全角数字或带圆圈的数字，数字后不必加上 卷/巻；
+            例如：このはな綺譚 15 ）。
             <br />
-            <span class="font-bold">使用说明：</span><br />
-            <span class="font-bold">1.</span> 输入商品（书籍等）的<span class="font-bold"
-              >原文（例如：日文）标题</span
-            >，以查询商品在各商家的商品及特典信息，现支持<a
-              href="https://www.melonbooks.co.jp"
-              target="_blank"
-              >Melonbooks</a
-            >、 <a href="https://www.animate.co.jp/">Animate</a>、
+            <span class="font-bold">现已支持 </span>
+            <a href="https://www.melonbooks.co.jp" target="_blank" >Melonbooks</a>、 
+            <a href="https://www.animate.co.jp/">Animate</a>、
             <a href="https://ecs.toranoana.jp" target="_blank">虎穴</a>、
             <a href="https://www.gamers.co.jp" target="_blank">Gamers</a>、
             <a href="https://shop.comiczin.jp" target="_blank">Comic Zin</a>、
-            <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a>。
+            <a href="https://www.mangaoh.co.jp" target="_blank">漫画王</a> 等店铺。
             <br />
-            想搜索书籍的指定卷数时，可用「作品日文标题+空格+卷数半角数字」的格式搜索，如「このはな綺譚
-            15」；不要输入全角数字或带圆圈的数字，数字后不必加上 卷/巻 。
+            <span class="font-bold">2. 欲查询作品的原文标题并复制，请输入作品的中文译名</span>。不能是简称。
             <br />
-            <span class="font-bold">2. </span>输入作品的<span class="font-bold">中文译名</span>
-            （不能是简称），以查询作品的<span class="font-bold">原文（例如：日文）标题</span
-            >并复制。
-          </p>
-          <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            推荐使用 Chrome / Edge / Firefox / Safari
-            等浏览器访问。个别功能在内核较旧的浏览器（比如部分 由中国大陆的公司开发 的 App
-            或浏览器）可能无法按预期运行。
+            <Badge variant="outline" class="select-none">反馈Bug·提建议</Badge> <a
+              href="https://github.com/YurierDept/get-bonus/issues"
+              target="_blank"
+              color="#45c2ff"
+              >提交 Issue</a
+            >
+            或 <a href="mailto:harico@yurier.net" target="_blank">发邮件给主编</a>。
             <br />
-            所有图片仅为展示与传达信息，其版权均归原作者；搜索结果与提示仅供参考，请以商家分发特典的实际策略与结果为准。
-            <br />
-            本程序在搜索时（除「试一试吧」模块）不可能也不会只展现百合作品（百合作品繁多，每人的标准也不同），请按需搜索具体作品。
-            <br />
-            本项目已在
-            <a href="https://github.com/YurierDept/get-bonus/" target="_blank">GitHub</a> 开源。
-            Proudly Developed by
-            <a href="https://yurier.net/about#yurier-dev" target="_blank">Yurier Dev</a>.
+            <ul>
+            <Badge variant="outline" class="select-none">关于浏览器的说明</Badge> 
+            推荐使用 Chrome / Edge / Firefox / Safari 等。部分 由中国大陆的公司开发 的 App
+            或浏览器，其内核可能较旧，可能使本项目的部分功能/特性失效。
+            </ul>
+            <ul>
+            <Badge variant="outline" class="select-none">其他说明与声明</Badge> 
+            所有信息仅供参考。
+            搜索结果由 Bangumi 番组计划 及已支持的商家网站 解析而来，<u>未做主观筛选</u>，
+            请理性看待搜索结果；提示由
+            <a href="https://github.com/YurierDept/get-bonus/graphs/contributors" target="_blank" color="#45c2ff">
+              本项目的贡献者
+            </a>
+            与其他同好撰写；
+            各商家对各自的特典信息与特典发放行为有最终解释权；
+            特典图片仅用于展示与传达信息，其版权均归原作者。
+            </ul>
+            <ul>
+              <Badge variant="outline" class="select-none">开发者与开源信息</Badge>  
+            「百合花船·特典搜索」项目由
+            <a href="https://yurier.net/about#yurier-dev" target="_blank" color="#45c2ff">Yurier Dev</a>
+            (<a href="https://yurier.net/" target="_blank" color="#45c2ff"> 百合研社团</a>开发小组 )
+            创建与做出主要贡献。
+
+            <a href="https://github.com/YurierDept/get-bonus/" target="_blank" color="#45c2ff">
+              已在 GitHub 开源 →
+            </a>
+            </ul>
           </p>
         </div>
       </div>
