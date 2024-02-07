@@ -71,9 +71,6 @@ async function copyOriginTitle() {
           >
           <span v-else>{{ subject.name }}</span>
         </a>
-        <Button @click="copyOriginTitle" variant="secondary" size="sm" margin-left="3px" class="ml-3 mt-3"
-          ><ClipboardCopy class="w-4 h-4 mr-2"  ></ClipboardCopy>复制原文标题</Button
-        >
       </CardTitle>
       <CardDescription class="mt-2">
         <span>Bangumi ID: </span>
@@ -82,6 +79,9 @@ async function copyOriginTitle() {
           target="_blank"
           class="hover:color-blue"
           >{{ subject.id }}</a
+        >
+        <Button @click="copyOriginTitle" variant="secondary" size="sm" margin-left="3px" class="ml-3 mt-3"
+          ><ClipboardCopy class="w-4 h-4 mr-2"  ></ClipboardCopy>复制原文标题</Button
         >
       </CardDescription>
     </CardHeader>
