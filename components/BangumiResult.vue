@@ -61,7 +61,7 @@ async function copyOriginTitle() {
 </script>
 
 <template>
-  <div class="mb-3">正在为您展现：作品信息卡片 & 在所有支持商家的搜索结果</div>
+  <div class="mb-6">正在为您展现：作品信息卡片 & 在所有支持商家的搜索结果</div>
   <Card class="w-full mb-6">
     <CardContent class="flex gap-4 lt-md:flex-col p-6">
       <div class="flex flex-col"><NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" /></div>
@@ -129,7 +129,7 @@ async function copyOriginTitle() {
           target="_blank"
           class="text-blue-400 hover:text-blue-500 hover:underline"
           >在 Bangumi 番组计划 使用相同的搜索关键词详细搜索 →</a
-        >。
+        >
       </div>
     </CardFooter>
   </Card>
