@@ -39,6 +39,8 @@ function inferTwitter(person: PersonInformation) {
   );
   const name = twitter?.[0]?.value as string | undefined;
   if (!name) return undefined;
+  // TODO: 临时处理, 后续优化为支持数组
+  if (Array.isArray(name)) return undefined;
   // Fix `https://twitter.com/...` to `@...`
   const twitterURL = `https://twitter.com/`;
   if (name.startsWith(twitterURL)) {
