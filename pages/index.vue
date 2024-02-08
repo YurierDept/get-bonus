@@ -112,13 +112,17 @@ const random = (arr: string[]) => {
   }
   return result;
 };
+
+const colorMode = useColorMode();
 </script>
 
 <template>
   <div class="main">
-    <div class="mt-10 select-none cursor-pointer" @click="resetSearch">
-      <span class="text-4xl title-font" color="#45c2ff">百合花船·特典搜索</span>
-      <Badge variant="outline" class="select-none">Beta</Badge>
+    <div class="mt-10">
+      <span @click="resetSearch" class="text-4xl title-font select-none cursor-pointer" color="#45c2ff">
+        百合花船·特典搜索
+      </span>
+      <Badge>Beta</Badge>
     </div>
     <div class="mt-8 flex gap-4">
       <Input
@@ -135,7 +139,7 @@ const random = (arr: string[]) => {
     <div class="mt-4 flex gap-4">
       <ClientOnly>
         <p>
-          <Badge variant="outline" class="select-none">试一试吧</Badge>&nbsp;
+          <Badge>试一试吧</Badge>&nbsp;
           <span v-for="(title, idx) in random(examples)" :key="title"
             >{{ idx > 0 ? '&nbsp;|&nbsp; ' : ''
             }}<span
@@ -227,7 +231,7 @@ const random = (arr: string[]) => {
       <div v-else>
         <div class="mt-6 rounded-4 p-6 b-1 space-y-3" line-height="7">
           <p class="[&>a]:underline underline-dotted [&>a:hover]:color-blue">
-            <Badge variant="outline" class="select-none">使用方法</Badge> 
+            <Badge>使用方法</Badge> 
             <span class="font-bold"> 1. 欲查询商品在各商家的商品及特典信息，请输入</span> 
             商品（书籍等）的
             <span class="font-bold">原文标题</span>（例如：星屑テレパス）；如果是书籍，
@@ -244,7 +248,7 @@ const random = (arr: string[]) => {
             <br />
             <span class="font-bold">2. 欲查询作品的原文标题并复制，请输入作品的中文译名</span>。不能是简称。
             <br />
-            <Badge variant="outline" class="select-none">反馈Bug·提建议</Badge> <a
+            <Badge>反馈Bug·提建议</Badge> <a
               href="https://github.com/YurierDept/get-bonus/issues"
               target="_blank"
               color="#45c2ff"
@@ -253,12 +257,12 @@ const random = (arr: string[]) => {
             或 <a href="mailto:harico@yurier.net" target="_blank">发邮件给主编</a>。
             <br />
             <ul>
-            <Badge variant="outline" class="select-none">关于浏览器的说明</Badge> 
+            <Badge>关于浏览器的说明</Badge> 
             推荐使用 Chrome / Edge / Firefox / Safari 等。部分 由中国大陆的公司开发 的 App
             或浏览器，其内核可能较旧，可能使本项目的部分功能/特性失效。
             </ul>
             <ul>
-            <Badge variant="outline" class="select-none">其他说明与声明</Badge> 
+            <Badge>其他说明与声明</Badge> 
             所有信息仅供参考。
             搜索结果由 Bangumi 番组计划 及已支持的商家网站 解析而来，<u>未做主观筛选</u>，
             请理性看待搜索结果；提示由
@@ -270,7 +274,7 @@ const random = (arr: string[]) => {
             特典图片仅用于展示与传达信息，其版权均归原作者。
             </ul>
             <ul>
-              <Badge variant="outline" class="select-none">开发者与开源信息</Badge>  
+              <Badge>开发者与开源信息</Badge>  
             「百合花船·特典搜索」项目由
             <a href="https://yurier.net/about#yurier-dev" target="_blank" color="#45c2ff">Yurier Dev</a>
             (<a href="https://yurier.net/" target="_blank" color="#45c2ff"> 百合研社团</a>开发小组 )
