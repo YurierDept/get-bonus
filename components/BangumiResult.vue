@@ -2,9 +2,9 @@
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
-
+ 
 import { toast } from 'vue-sonner';
-import { ClipboardCopy } from 'lucide-vue-next';
+import { ClipboardCopy, ArrowLeft } from 'lucide-vue-next';
 
 type PersonDetail = SubjectPersons[0] & { detail: PersonInformation };
 
@@ -60,10 +60,21 @@ async function copyOriginTitle() {
   await navigator.clipboard.writeText(props.subject.name);
   toast.success(`复制原文标题成功`, {});
 }
+
+const route = useRoute();
+const router = useRouter();
+const backToHome = () => {
+    router.push({
+    path: route.path,
+    query: { q: '' }
+  });
+};
 </script>
 
 <template>
-  <div class="mb-6">正在为您展现：作品信息卡片 & 在所有支持商家的搜索结果</div>
+  <Button @click="backToHome" variant="secondary" size="sm" class="mb-3" 
+          ><ArrowLeft class="w-4 h-4 mr-2"  ></ArrowLeft>返回首页</Button
+        >
   <Card class="w-full mb-6">
     <CardContent class="flex gap-4 lt-md:flex-col p-6">
       <div class="flex flex-col"><NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" /></div>
