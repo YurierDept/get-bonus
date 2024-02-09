@@ -33,14 +33,14 @@
       >
       或 <a href="mailto:harico@yurier.net" target="_blank">发邮件给主编</a>。
     </p>
-    <ul>
+    <p>
       <Badge component="span" variant="outline" class="select-none mr-1">关于浏览器的说明</Badge
       ><span
         >推荐使用 Chrome / Edge / Firefox / Safari 等。部分 由中国大陆的公司开发 的
         App或浏览器，其内核可能较旧，可能使本项目的部分功能/特性失效。</span
       >
-    </ul>
-    <ul>
+    </p>
+    <p>
       <Badge component="span" variant="outline" class="select-none mr-1">其他说明与声明</Badge
       ><span
         >所有信息仅供参考。 搜索结果由 Bangumi 番组计划
@@ -55,8 +55,8 @@
       </a>
       与其他同好撰写； 各商家对各自的特典信息与特典发放行为有最终解释权；
       特典图片仅用于展示与传达信息，其版权均归原作者。
-    </ul>
-    <ul>
+    </p>
+    <p>
       <Badge component="span" variant="outline" class="select-none mr-1">开发者与开源信息</Badge
       ><span>
         「百合花船·特典搜索」项目由
@@ -69,6 +69,6 @@
           已在 GitHub 开源 →
         </a>
       </span>
-    </ul>
+    </p>
   </div>
 </template>
