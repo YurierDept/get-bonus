@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mt-6 rounded-4 p-6 b-1 space-y-3 [&>p>a]:(underline underline-dotted underline-offset-4) [&>p>a:hover]:color-blue"
+    class="mt-6 rounded-4 p-6 b-1 space-y-3 [&_a]:(underline underline-dotted underline-offset-4) [&_a:hover]:color-blue"
   >
     <p>
       <Badge component="span" variant="outline" class="select-none mr-1">使用方法</Badge
