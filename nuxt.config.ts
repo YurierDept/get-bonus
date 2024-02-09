@@ -5,11 +5,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@unocss/nuxt',
-    'shadcn-nuxt',
     '@nuxt/image',
-    'unplugin-info/nuxt',
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    'shadcn-nuxt',
+    'unplugin-info/nuxt'
   ],
   alias: {
     'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))

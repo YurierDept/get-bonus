@@ -118,17 +118,22 @@ const colorMode = useColorMode();
 
 <template>
   <div class="main">
-    <div class="gap-3 mt-10">
+    <div class="flex gap-3 mt-10">
       <span @click="resetSearch" class="text-4xl title-font select-none cursor-pointer" color="#45c2ff">
         百合花船·特典搜索
       </span>
-      <Badge variant="outline" class="select-none mr-3">Beta</Badge>
-      <Button v-if="colorMode.value === 'dark'" variant="secondary" size="sm" @click="colorMode.value = 'light'" class="mt-2">  
-        <Sun class="w-4 h-4 mr-2" />切换为浅色模式
-      </Button>
-      <Button v-else variant="secondary" size="sm" @click="colorMode.value = 'dark'" class="mt-2">  
-        <Moon class="w-4 h-4 mr-2" />切换为深色模式
-      </Button>
+      <div class="flex items-end">
+        <Badge variant="outline" class="select-none mr-3">Beta</Badge>
+      </div>
+      <div class="flex-auto"></div>
+      <div>
+        <Button v-if="colorMode.value === 'dark'" variant="secondary" size="sm" @click="colorMode.preference = 'light'" class="mt-2">  
+          <Sun class="w-4 h-4 mr-2" />切换为浅色模式
+        </Button>
+        <Button v-else variant="secondary" size="sm" @click="colorMode.preference = 'dark'" class="mt-2">  
+          <Moon class="w-4 h-4 mr-2" />切换为深色模式
+        </Button>
+      </div>
     </div>
     <div class="mt-8 flex gap-4">
       <Input
