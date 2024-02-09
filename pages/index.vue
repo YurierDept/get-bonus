@@ -259,17 +259,7 @@ const colorMode = useColorMode();
         <UsageHelp></UsageHelp>
       </div>
     </div>
-    <footer class="flex justify-center text-sm">
-      「百合花船·特典搜索」项目是
-      <a
-        href="https://yurier.net/projects#%E6%9C%8D%E5%8A%A1-%E3%80%8C%E7%99%BE%E5%90%88%E8%8A%B1%E8%88%B9%E3%80%8D%E4%BC%81%E5%88%92"
-        target="_blank"
-        color="#45c2ff"
-      >
-        「百合花船」企划
-      </a>
-      的一部分。
-    </footer>
+    <Footer></Footer>
   </div>
 </template>
 
