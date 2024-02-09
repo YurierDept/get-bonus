@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  debug: true,
   devtools: { enabled: true },
   modules: [
     '@unocss/nuxt',
