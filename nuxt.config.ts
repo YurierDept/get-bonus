@@ -3,8 +3,14 @@ import { fileURLToPath } from 'node:url';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@unocss/nuxt', 'shadcn-nuxt', '@nuxt/image', 'unplugin-info/nuxt','@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode'],
+  modules: [
+    '@unocss/nuxt',
+    'shadcn-nuxt',
+    '@nuxt/image',
+    'unplugin-info/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode'
+  ],
   alias: {
     'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))
   },
@@ -51,5 +57,10 @@ export default defineNuxtConfig({
   },
   colorMode: {
     classSuffix: ''
+  },
+  info: {
+    meta: {
+      // ...
+    }
   }
 });
