@@ -118,16 +118,16 @@ const colorMode = useColorMode();
 
 <template>
   <div class="main">
-    <div class="flex gap-3 mt-10">
-      <span
-        @click="resetSearch"
-        class="text-4xl title-font select-none cursor-pointer"
-        color="#45c2ff"
-      >
-        百合花船·特典搜索
-      </span>
-      <div class="flex items-end">
-        <Badge variant="outline" class="select-none mr-3">Beta</Badge>
+    <div class="md:flex gap-3 mt-10">
+      <div>
+        <span
+          @click="resetSearch"
+          class="text-4xl title-font select-none cursor-pointer inline-block md:mr3"
+          color="#45c2ff"
+        >
+          百合花船·特典搜索
+        </span>
+        <Badge component="span" variant="outline" class="inline-block select-none">Beta</Badge>
       </div>
       <div class="flex-auto"></div>
       <div>
