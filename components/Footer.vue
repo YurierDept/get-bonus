@@ -6,9 +6,12 @@ import { version } from '~build/package';
 </script>
 
 <template>
-  <footer class="space-y-2">
+  <footer class="space-y-2 mb-10">
     <div class="text-sm text-base-600 text-center">
-      <span>Git Commit: {{ sha.slice(0, 6) }}</span>
+      <span>程序版本号: {{ version }} ( {{ sha.slice(0, 6) }} ) </span>
+    </div>
+    <div class="text-sm text-base-600 text-center">
+      <span>程序构建于: {{ buildTime }} </span>
     </div>
     <div class="flex justify-center text-sm">
       「百合花船·特典搜索」项目是
