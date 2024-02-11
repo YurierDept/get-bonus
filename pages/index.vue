@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
-import { Loader2, Search, Moon, Sun } from 'lucide-vue-next';
+import { Loader, Loader2, Search, Moon, Sun } from 'lucide-vue-next';
 
 const route = useRoute();
 const router = useRouter();
@@ -179,7 +179,7 @@ const colorMode = useColorMode();
       </ClientOnly>
     </div>
     <div class="w-full mt-6 pb-16">
-      <div v-if="isSearching" class="w-full"><Skeleton class="h-60 w-full"></Skeleton></div>
+      <div v-if="isSearching" class="w-full"><Loader class="w-10 h-10 animate-spin" /></div>
       <div v-else-if="details?.details || details?.subject">
         <BangumiResult
           v-if="details.subject"
