@@ -50,4 +50,4 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           pnpm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-          pnpm -r publish --access public
+          pnpm -r publish --access public --no-git-checks
