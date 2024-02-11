@@ -39,7 +39,8 @@ export class Gamers extends Provider {
     const dom = new JSDOM(html);
     const doc = dom.window.document;
 
-    const title = doc.querySelector('.ttl_style01');
+    const titleElement = doc.querySelector('.ttl_style01');
+    const title = titleElement?.textContent?.trim?.() || '';
 
     const price = resolvePrice(doc.querySelector('.item_detail_price .price')?.textContent?.trim());
     const date = resolveDate(
@@ -56,9 +57,19 @@ export class Gamers extends Provider {
       };
     });
 
+    const isLimited = title.includes("限定版");
+    if(isLimited == true){
+      const itemImgMain = doc.querySelector('.item_img_main');  
+      const imgZoom = itemImgMain?.querySelector('.img_zoom') as HTMLImageElement;
+      items.unshift({ 
+        image: imgZoom.src,
+        description: '此为Gamers限定版。商品信息如图所示。' 
+      });
+    }
+
     return {
       provider: this.id,
-      title: title?.textContent?.trim?.() || '',
+      title,
       date,
       price,
       url,
