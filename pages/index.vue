@@ -155,7 +155,7 @@ const colorMode = useColorMode();
       <Input
         v-model="searchInput"
         @keydown.enter="search(searchInput)"
-        placeholder="在搜索前，请注意查看首页的各项说明"
+        placeholder="搜前记得看首页说明"
       ></Input>
       <Button @click="search(searchInput)" :disabled="isSearching">
         <Loader2 v-if="isSearching" class="w-4 h-4 mr-2 animate-spin" />
