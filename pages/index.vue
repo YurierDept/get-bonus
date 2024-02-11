@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
-import { Loader, Loader2, Search, Moon, Sun } from 'lucide-vue-next';
+import { Loader, Loader2, Search, Moon, Sun, Trash2, XCircle } from 'lucide-vue-next';
+import { ref, watchEffect } from 'vue'; 
 
 const route = useRoute();
 const router = useRouter();
@@ -50,7 +51,8 @@ const search = async (input: string) => {
     path: route.path,
     query: { q: input }
   });
-
+  const updatedHistory = [input, ...searchHistory.value.filter(item => item !== input)];  
+  searchHistory.value = updatedHistory.slice(0, 5);   
   try {
     abort = new AbortController();
     isSearching.value = true;
@@ -114,6 +116,35 @@ const random = (arr: string[]) => {
 };
 
 const colorMode = useColorMode();
+
+const searchHistory = ref<string[]>([]);  
+  
+// 初始化时从localStorage加载搜索历史  
+const initHistory = () => {  
+    const savedHistory = localStorage.getItem('searchHistory');  
+    if (savedHistory) {  
+      searchHistory.value = JSON.parse(savedHistory) as string[];  
+    }  
+};  
+  
+// 移除历史记录中的某个条目  
+const removeHistoryItem = (index: number) => {  
+  searchHistory.value.splice(index, 1);  
+};  
+  
+// 清空搜索历史  
+const clearHistory = () => {  
+  searchHistory.value = [];  
+};  
+
+onMounted(() => {  
+  initHistory(); 
+
+  // 监听searchHistory的变化并保存到localStorage  
+  watchEffect(() => {  
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory.value));  
+});   
+}); 
 </script>
 
 <template>
@@ -155,6 +186,7 @@ const colorMode = useColorMode();
       <Input
         v-model="searchInput"
         @keydown.enter="search(searchInput)"
+        @keyup.enter="search(searchInput)"
         placeholder="搜前记得看首页说明"
       ></Input>
       <Button @click="search(searchInput)" :disabled="isSearching">
@@ -162,6 +194,20 @@ const colorMode = useColorMode();
         <Search v-else class="w-4 h-4 mr-2"></Search>
         <span class="title-font">搜索</span>
       </Button>
+    </div>
+    <div class="mt-4 gap-4">
+      <Badge variant="outline" class="select-none">搜索记录</Badge>&nbsp;
+      <button @click="clearHistory" class="mr-4">
+        <Trash2 class="w-3 h-3"></Trash2>
+      </button>  
+      <Item v-for="(item, index) in searchHistory" :key="index" class="mr-4">  
+          <button @click="search(item)" class="mr-3">
+            {{ item }}
+          </button>    
+          <button @click="removeHistoryItem(index)">
+            <XCircle class="w-3 h-3 mr-4"></XCircle>
+          </button>  
+      </Item>   
     </div>
     <div class="mt-4 flex gap-4">
       <ClientOnly>
