@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
-import { Loader, Loader2, Search, Moon, Sun, Trash2, XCircle } from 'lucide-vue-next';
+import { Loader, Loader2, Search, Moon, Sun, Trash2, XCircle, Sparkles, History } from 'lucide-vue-next';
 import { ref, watchEffect } from 'vue'; 
 
 const route = useRoute();
@@ -196,10 +196,17 @@ onMounted(() => {
       </Button>
     </div>
     <div class="mt-4 gap-4">
-      <Badge variant="outline" class="select-none">搜索记录</Badge>&nbsp;
-      <button @click="clearHistory" class="mr-4">
-        <Trash2 class="w-3 h-3"></Trash2>
-      </button>  
+      <Badge variant="outline" class="select-none mr-4">
+        <button class="mr-1.5">
+          <History class="w-3 h-3"></History>
+        </button>
+        搜索历史 
+      </Badge>
+      <Badge variant="outline" class="select-none mr-4">
+        <button @click="clearHistory" >
+          <Trash2 class="w-3 h-3"></Trash2>
+        </button> 
+      </Badge>
       <Item v-for="(item, index) in searchHistory" :key="index" class="mr-4">  
           <button @click="search(item)" class="mr-3">
             {{ item }}
@@ -212,7 +219,12 @@ onMounted(() => {
     <div class="mt-4 flex gap-4">
       <ClientOnly>
         <p>
-          <Badge variant="outline" class="select-none">试一试吧</Badge>&nbsp;
+          <Badge variant="outline" class="select-none">
+            <button class="mr-1.5">
+              <Sparkles class="w-3 h-3"></Sparkles>
+            </button>
+            试一试吧
+          </Badge>&nbsp;
           <span v-for="(title, idx) in random(examples)" :key="title"
             >{{ idx > 0 ? '&nbsp;|&nbsp; ' : ''
             }}<span
