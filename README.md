@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/github/license/YurierDept/get-bonus)](https://github.com/YurierDept/get-bonus/blob/main/LICENSE)
 [![CI](https://github.com/YurierDept/get-bonus/actions/workflows/ci.yml/badge.svg)](https://github.com/YurierDept/get-bonus/actions/workflows/ci.yml)
 
+[![Powered by Yurier Dev](https://img.shields.io/badge/Powered%20by%20Yurier%20Dev-45c2ff)](https://yurier.net/about#yurier-dev)
+
 一键搜索同一商品在多个商家的特典！「百合花船·特典搜索」可让用户快速从 Melonbooks、 Animate、 虎穴、 Gamers、 Comic Zin、 漫画王 等商家网站检索商品和对应特典。
 
 程序尚在开发和完善当中，但部分功能已经可用。  
