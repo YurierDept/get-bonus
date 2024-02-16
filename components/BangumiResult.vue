@@ -2,7 +2,7 @@
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
- 
+
 import { toast } from 'vue-sonner';
 import { ClipboardCopy, ArrowLeft } from 'lucide-vue-next';
 
@@ -64,7 +64,7 @@ async function copyOriginTitle() {
 const route = useRoute();
 const router = useRouter();
 const backToHome = () => {
-    router.push({
+  router.push({
     path: route.path,
     query: { q: '' }
   });
@@ -72,24 +72,28 @@ const backToHome = () => {
 </script>
 
 <template>
-  <Button @click="backToHome" variant="secondary" size="sm" class="mb-3" 
-          ><ArrowLeft class="w-4 h-4 mr-2"  ></ArrowLeft>返回首页</Button
-        >
+  <Button @click="backToHome" variant="secondary" size="sm" class="mb-3">
+    <ArrowLeft class="w-4 h-4 mr-2"></ArrowLeft>返回首页
+  </Button>
   <Card class="w-full mb-6">
     <CardContent class="flex gap-4 lt-md:flex-col p-6">
-      <div class="flex flex-col"><NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" /></div>
+      <div class="flex flex-col">
+        <NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" />
+      </div>
       <div>
         <CardHeader>
-        <CardTitle>
-        <span v-if="subject.name_cn && subject.name"
-            ><span>{{ subject.name_cn }}</span
-            ><span class="inline-block ml-3 font-normal text-base">原文标题：{{ subject.name }}</span></span
-          >
-          <span v-else>{{ subject.name }}</span>
-        </CardTitle>
-        <Button @click="copyOriginTitle" variant="secondary" size="sm" class="mt-3" 
-          ><ClipboardCopy class="w-4 h-4 mr-2"  ></ClipboardCopy>复制原文标题</Button
-        >
+          <CardTitle>
+            <span v-if="subject.name_cn && subject.name"
+              ><span>{{ subject.name_cn }}</span
+              ><span class="inline-block ml-3 font-normal text-base"
+                >原文标题：{{ subject.name }}</span
+              ></span
+            >
+            <span v-else>{{ subject.name }}</span>
+          </CardTitle>
+          <Button @click="copyOriginTitle" variant="secondary" size="sm" class="mt-3">
+            <ClipboardCopy class="w-4 h-4 mr-2"></ClipboardCopy>复制原文标题
+          </Button>
         </CardHeader>
         <div class="mt-6 space-y-1">
           <div v-for="[relation, list] in persons" :key="relation">
@@ -117,26 +121,24 @@ const backToHome = () => {
             </span>
           </div>
           <div class="mt-1">
-          <a
-            :href="`https://bgm.tv/subject/${subject.id}`"
-            target="_blank"
-            class="color-blue"
-          >查看作品在 Bangumi 番组计划 的条目 →</a
-          >
+            <a :href="`https://bgm.tv/subject/${subject.id}`" target="_blank" class="color-blue"
+              >查看作品在 Bangumi 番组计划 的条目 →</a
+            >
           </div>
         </div>
       </div>
     </CardContent>
     <CardFooter class="flex flex-col items-start px-6 pt-4 pb-6 border-t text-sm space-y-1">
       <div>
-        ①信息来自  
+        ①信息来自
         <a
           href="https://bgm.tv/"
           target="_blank"
           class="text-blue-400 hover:text-blue-500 hover:underline"
           >Bangumi 番组计划</a
-        > 。
-        <br/>②如果本卡片的展现结果不符合预期（如：作品完全不对；想搜本作却搜到外传），请检查搜索关键词是否完整无误，避免使用简称。也可以
+        >
+        。
+        <br />②如果本卡片的展现结果不符合预期（如：作品完全不对；想搜本作却搜到外传），请检查搜索关键词是否完整无误，避免使用简称。也可以
         <a
           :href="`https://bgm.tv/subject_search/${input}?cat=1`"
           target="_blank"
