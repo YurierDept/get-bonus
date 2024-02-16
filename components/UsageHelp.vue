@@ -76,7 +76,7 @@ import { BookCheck, Bug, Compass, Info, PackageOpen } from 'lucide-vue-next';
         本项目的贡献者
       </a>
       与其他同好撰写； 各商家对各自的特典信息与特典发放行为有最终解释权；
-      特典图片仅用于展示与传达信息，其版权均归原作者。
+      特典图片仅用于展示与传达信息，其版权均归原作者；价格标签会标注货币单位，其中「円」为日元。
     </p>
     <p>
       <Badge component="span" variant="outline" class="select-none mr-1">

@@ -2,7 +2,7 @@
 import type { Detail } from 'get-bonus';
 
 import { toast } from 'vue-sonner';
-import { Copy } from 'lucide-vue-next';
+import { Copy, Store, Calendar, BadgeJapaneseYen } from 'lucide-vue-next';
 
 const props = defineProps<{
   data: Detail;
@@ -30,13 +30,18 @@ async function copyUrl() {
     </span>
     <span class="mt-2 flex items-center gap-2">
       <a :href="baseUrl" target="_blank">
-        <Badge variant="outline" class="select-none">{{ data.provider }}</Badge>
+        <Badge variant="outline" class="select-none">
+          <Store class="w-3 h-3 mr-2"></Store>
+          {{ data.provider }}
+        </Badge>
       </a>
       <Badge v-if="data.date" variant="outline"
-        ><span class="select-none mr-1">发售于</span><span>{{ data.date }}</span>
+        ><Calendar class="w-3 h-3 mr-2"></Calendar>
+        <span class="select-none mr-1">发售日:</span><span>{{ data.date }}</span>
       </Badge>
       <Badge v-if="data.price" variant="outline"
-        ><span class="select-none mr-1">¥</span><span>{{ data.price }}</span>
+        ><BadgeJapaneseYen class="w-3 h-3 mr-2"></BadgeJapaneseYen>
+        <span>{{ data.price }}</span><span class="select-none ml-1">円</span>
       </Badge>
     </span>
     <ul>
