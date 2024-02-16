@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
-import { Loader, Loader2, Search, Moon, Sun, Trash2, XCircle, Sparkles, History } from 'lucide-vue-next';
+import { Loader, Loader2, Search, Moon, Sun, Trash2, XCircle, Sparkles, History, AlertCircle } from 'lucide-vue-next';
 import { ref, watchEffect } from 'vue'; 
+import { Card, CardContent} from '..//components/ui/card';
 
 const route = useRoute();
 const router = useRouter();
@@ -246,6 +247,8 @@ onMounted(() => {
           :persons="details.persons"
         ></BangumiResult>
         <div v-else class="flex">
+          <Card class="w-full mb-6">
+          <CardContent class="p-6">
           <span class="text-2xl font-bold">貌似在 Bangumi 番组计划 没有找到作品详情。</span>
           <br />如果你搜索的并不是一部具体的「作品」，或者下方的商家搜索结果已按预期输出，请忽略本提示。
           <br />如果你搜索的作品在 Bangumi 番组计划存在，但仍然弹出这个提示，您可以<a
@@ -254,14 +257,19 @@ onMounted(() => {
             class="color-blue"
             >提交 Issue</a
           >。
+          </CardContent>
+          </Card>
         </div>
         <SearchResult
           v-if="details?.details && foundNums > 0"
           :details="details.details"
         ></SearchResult>
         <div v-else>
+          <Card class="w-full mb-6">
+          <CardContent class="p-6">
           <span class="text-2xl font-bold"
-            >已在目前支持的所有商家都搜索了一次，但貌似找不到商品。</span
+            ><AlertCircle />
+            已在目前支持的所有商家都搜索了一次，但貌似找不到商品。</span
           >
           <br />
           1. 请先确认您在搜索框输入的是商品（书籍等）的<span class="font-bold"
@@ -285,10 +293,16 @@ onMounted(() => {
             >提交 Issue</a
           >
           给开发者，开发者会协助解决。
+          </CardContent>
+          </Card>
         </div>
       </div>
       <div v-else-if="details && foundNums === 0">
-        <span class="text-2xl font-bold">没有搜索结果。</span><br />
+        <Card class="w-full mb-6">
+        <CardContent class="p-6">
+        <span class="text-2xl font-bold">
+          <AlertCircle />
+          没有搜索结果。</span><br />
         无法在 Bangumi 番组计划 与所有支持的商家找到任何符合搜索关键词的作品与商品。
         <br />
         1. 请先确认您在搜索框输入的是商品（书籍等）的<span class="font-bold"
@@ -312,6 +326,8 @@ onMounted(() => {
           >提交 Issue</a
         >
         给开发者，开发者会协助解决。
+        </CardContent>
+        </Card>
       </div>
       <div v-else>
         <UsageHelp></UsageHelp>
