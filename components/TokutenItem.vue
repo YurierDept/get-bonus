@@ -70,11 +70,14 @@ async function copyDescription() {
     toast.error('复制描述失败', {});
   }
 }
+
+const colorMode = useColorMode();
 </script>
 
 <template>
   <li class="flex gap-4 mt-4">
-    <NuxtImg class="max-w-36" :src="data.image" :placeholder="144" />
+    <NuxtImg v-show="colorMode.value === 'light'" class="max-w-36" :src="data.image" placeholder="./load-placeholder.png" />
+    <NuxtImg v-show="colorMode.value === 'dark'" class="max-w-36" :src="data.image" placeholder="./load-placeholder-dark-mode.png" />
     <div class="grid grid-rows-[1fr_auto] gap-2">
       <p class="text-3.5 whitespace-pre-line">{{ data.description }}</p>
       <div class="flex gap-4">

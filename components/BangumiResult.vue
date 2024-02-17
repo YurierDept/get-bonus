@@ -60,13 +60,16 @@ async function copyOriginTitle() {
   await navigator.clipboard.writeText(props.subject.name);
   toast.success(`复制原文标题成功`, {});
 }
+
+const colorMode = useColorMode();
 </script>
 
 <template>
   <Card class="w-full mb-6">
     <CardContent class="flex gap-4 lt-md:flex-col p-6">
       <div class="flex flex-col">
-        <NuxtImg class="max-w-36" :src="subject.images.large" :placeholder="144" />
+        <NuxtImg v-show="colorMode.value === 'light'" class="max-w-36" :src="subject.images.large" placeholder="./load-placeholder.png"/>
+        <NuxtImg v-show="colorMode.value === 'dark'" class="max-w-36" :src="subject.images.large" placeholder="./load-placeholder-dark-mode.png"/>
       </div>
       <div>
         <CardHeader>
