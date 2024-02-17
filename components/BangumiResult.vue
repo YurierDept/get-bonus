@@ -4,7 +4,7 @@ import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
 
 import { toast } from 'vue-sonner';
-import { ClipboardCopy, ArrowLeft } from 'lucide-vue-next';
+import { ClipboardCopy } from 'lucide-vue-next';
 
 type PersonDetail = SubjectPersons[0] & { detail: PersonInformation };
 
@@ -60,21 +60,9 @@ async function copyOriginTitle() {
   await navigator.clipboard.writeText(props.subject.name);
   toast.success(`复制原文标题成功`, {});
 }
-
-const route = useRoute();
-const router = useRouter();
-const backToHome = () => {
-  router.push({
-    path: route.path,
-    query: { q: '' }
-  });
-};
 </script>
 
 <template>
-  <Button @click="backToHome" variant="secondary" size="sm" class="mb-3">
-    <ArrowLeft class="w-4 h-4 mr-2"></ArrowLeft>返回首页
-  </Button>
   <Card class="w-full mb-6">
     <CardContent class="flex gap-4 lt-md:flex-col p-6">
       <div class="flex flex-col">
