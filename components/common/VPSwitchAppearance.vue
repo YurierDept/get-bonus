@@ -14,7 +14,7 @@ const toggleAppearance = () => {
 };
 
 const switchTitle = computed(() => {
-  return colorMode.value === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+  return colorMode.value === 'dark' ? '切换到浅色模式' : '切换到深色模式';
 });
 </script>
 
