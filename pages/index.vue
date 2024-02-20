@@ -14,7 +14,9 @@ import {
   CircleDashed
 } from 'lucide-vue-next';
 import { ref, watchEffect } from 'vue';
-import { Card, CardContent } from '..//components/ui/card';
+
+import VPSwitchAppearance from '@/components/common/VPSwitchAppearance.vue';
+import { Card, CardContent } from '@/components/ui/card';
 
 const route = useRoute();
 const router = useRouter();
@@ -138,13 +140,13 @@ const random = (arr: string[]) => {
 
 const colorMode = useColorMode();
 
-const fixedTitlePart = ' - 百合花船·特典搜索'; 
+const fixedTitlePart = ' - 百合花船·特典搜索';
 function updateTitle() {
   let newTitle = route.query.q ? `${route.query.q}${fixedTitlePart}` : '百合花船·特典搜索';
-  if (route.query.q = '') {
+  if ((route.query.q = '')) {
     newTitle = '百合花船·特典搜索';
   }
-  document.title = newTitle;  
+  document.title = newTitle;
 }
 
 // 初始化时从localStorage加载搜索历史
@@ -178,37 +180,19 @@ onMounted(() => {
 
 <template>
   <div class="main">
-    <div class="md:flex gap-3 mt-10">
+    <div class="flex md:gap-3 mt-10">
       <div>
         <span
           @click="resetSearch"
-          class="text-4xl title-font select-none cursor-pointer inline-block md:mr3"
+          class="text-4xl lt-sm:text-3xl title-font select-none cursor-pointer inline-block md:mr3"
           color="#45c2ff"
+          >百合花船·特典搜索</span
         >
-          百合花船·特典搜索
-        </span>
         <Badge component="span" variant="outline" class="inline-block select-none">Beta</Badge>
       </div>
       <div class="flex-auto"></div>
-      <div>
-        <Button
-          v-if="colorMode.value === 'dark'"
-          variant="secondary"
-          size="sm"
-          @click="colorMode.preference = 'light'"
-          class="mt-2"
-        >
-          <Sun class="w-4 h-4 mr-2" />切换为浅色模式
-        </Button>
-        <Button
-          v-else
-          variant="secondary"
-          size="sm"
-          @click="colorMode.preference = 'dark'"
-          class="mt-2"
-        >
-          <Moon class="w-4 h-4 mr-2" />切换为深色模式
-        </Button>
+      <div class="flex items-end">
+        <VPSwitchAppearance></VPSwitchAppearance>
       </div>
     </div>
     <div class="mt-8 flex gap-4">
