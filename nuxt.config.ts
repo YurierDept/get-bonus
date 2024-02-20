@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   alias: {
     'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))
   },
-  css: ['@unocss/reset/tailwind.css', './assets/fonts.css'],
+  css: ['@unocss/reset/tailwind.css', './assets/fonts.css', './assets/vitepress.css'],
   app: {
     head: {
       title: '百合花船·特典搜索',
