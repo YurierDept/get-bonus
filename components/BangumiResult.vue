@@ -33,29 +33,6 @@ function inferLink(person: PersonInformation) {
   return official?.[0]?.value as string | undefined;
 }
 
-function inferTwitter(person: PersonInformation) {
-  const twitter = person.infobox?.filter((ib) =>
-    ['推特', 'X (Twitter)', 'Twitter'].includes(ib.key as string)
-  );
-  const name = twitter?.[0]?.value as string | undefined;
-  if (!name) return undefined;
-  // TODO: 临时处理, 后续优化为支持数组
-  if (Array.isArray(name)) return undefined;
-  // Fix `https://twitter.com/...` to `@...`
-  const twitterURL = `https://twitter.com/`;
-  if (name.startsWith(twitterURL)) {
-    return '@' + name.slice(twitterURL.length);
-  }
-  const xURL = `https://x.com/`;
-  if (name.startsWith(xURL)) {
-    return '@' + name.slice(xURL.length);
-  }
-  if (name.startsWith('@')) {
-    return name;
-  }
-  return '@' + name;
-}
-
 async function copyOriginTitle() {
   await navigator.clipboard.writeText(props.subject.name);
   toast.success(`复制原文标题成功`, {});
@@ -68,8 +45,18 @@ const colorMode = useColorMode();
   <Card class="w-full mb-6">
     <CardContent class="flex gap-4 lt-md:flex-col p-6">
       <div class="flex flex-col">
-        <NuxtImg v-show="colorMode.value === 'light'" class="max-w-36" :src="subject.images.large" placeholder="./load-placeholder.png"/>
-        <NuxtImg v-show="colorMode.value === 'dark'" class="max-w-36" :src="subject.images.large" placeholder="./load-placeholder-dark-mode.png"/>
+        <NuxtImg
+          v-show="colorMode.value === 'light'"
+          class="max-w-36"
+          :src="subject.images.large"
+          placeholder="./load-placeholder.png"
+        />
+        <NuxtImg
+          v-show="colorMode.value === 'dark'"
+          class="max-w-36"
+          :src="subject.images.large"
+          placeholder="./load-placeholder-dark-mode.png"
+        />
       </div>
       <div>
         <CardHeader>
@@ -99,16 +86,16 @@ const colorMode = useColorMode();
                 >{{ person.name }}</a
               >
               <span v-else>{{ person.name }}</span>
-              <a
-                v-if="inferTwitter(person.detail)"
-                class="ml-2 inline-block"
-                :href="`https://twitter.com/${inferTwitter(person.detail)?.slice(1)}`"
-                target="_blank"
-              >
-                <span class="text-blue-400 hover:text-blue-500">{{
-                  inferTwitter(person.detail)
-                }}</span>
-              </a>
+              <span v-if="inferPersonTwitter(person.detail)">
+                <a
+                  v-for="name in inferPersonTwitter(person.detail)"
+                  :href="`https://twitter.com/${name.slice(1)}`"
+                  target="_blank"
+                  class="ml-2 inline-block"
+                >
+                  <span class="text-blue-400 hover:text-blue-500">{{ name }}</span>
+                </a>
+              </span>
             </span>
           </div>
           <div class="mt-1">
