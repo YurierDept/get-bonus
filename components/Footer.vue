@@ -9,7 +9,7 @@ import { Milestone, Clock3, Sparkles } from 'lucide-vue-next';
 </script>
 
 <template>
-  <footer class="space-y-2 mb-10 text-sm text-center text-base-500">
+  <footer class="space-y-2 mb-10 text-sm lt-sm:text-xs text-center text-base-500">
     <p>
       <Milestone class="inline align-baseline w-3 h-3 mr-1"></Milestone>
       <span

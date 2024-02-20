@@ -180,7 +180,9 @@ onMounted(() => {
           color="#45c2ff"
           >百合花船·特典搜索</span
         >
-        <Badge component="span" variant="outline" class="inline-block select-none">Beta</Badge>
+        <Badge component="span" variant="outline" class="inline-block select-none lt-sm:px-1.5"
+          >Beta</Badge
+        >
       </div>
       <div class="flex-auto"></div>
       <div class="flex items-end">
@@ -348,6 +350,6 @@ onMounted(() => {
 
 <style>
 .main {
-  @apply: mx-auto xl:w-5xl lg:w-3xl md:w-2xl lt-md:w-[95vw] lt-md:px-3;
+  @apply: mx-auto xl:w-5xl lg:w-3xl md:w-2xl lt-md:w-[95vw] lt-md:px-3 lt-sm:w-[100vw] lt-sm:px-2;
 }
 </style>
