@@ -29,8 +29,6 @@ export function inferPersonTwitter(person: PersonInformation) {
     return '@' + name;
   };
 
-  console.log(names);
-
   if (Array.isArray(names)) {
     return names.map((name) => (name.v ? transform(name.v) : undefined)).filter(Boolean);
   } else if (typeof names === 'string') {
