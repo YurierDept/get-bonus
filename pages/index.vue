@@ -2,7 +2,6 @@
 import type { Detail } from 'get-bonus';
 import type { SubjectInformation, SubjectPersons, PersonInformation } from 'bgmc';
 import {
-  Loader,
   Loader2,
   Search,
   Moon,
@@ -11,7 +10,8 @@ import {
   XCircle,
   Sparkles,
   History,
-  AlertCircle
+  AlertCircle,
+  CircleDashed
 } from 'lucide-vue-next';
 import { ref, watchEffect } from 'vue';
 import { Card, CardContent } from '..//components/ui/card';
@@ -266,7 +266,7 @@ onMounted(() => {
       </ClientOnly>
     </div>
     <div class="w-full mt-6 pb-16">
-      <div v-if="isSearching" class="w-full"><Loader class="w-10 h-10 animate-spin" /></div>
+      <div v-if="isSearching" class="w-full"><CircleDashed class="w-10 h-10 animate-spin" /></div>
       <div v-else-if="details?.details || details?.subject">
         <BangumiResult
           v-if="details.subject"
