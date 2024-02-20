@@ -42,12 +42,34 @@ export class Mangaoh extends Provider {
     const descs = doc
       .querySelector('.thickbox:last-of-type')
       ?.nextElementSibling?.textContent?.split?.('+');
-    const dateSelector = doc.querySelector('.spec-table > tbody:nth-child(1) > tr > th:contains("発売日")');  
-    const date = dateSelector?.nextElementSibling?.textContent?.trim();
-    const priceSelector = doc.querySelector('.spec-table > tbody:nth-child(1) > tr > th:contains("価格")');  
-    const price = resolvePrice(
-      priceSelector?.nextElementSibling?.textContent?.trim()
-    );
+    const tbody = doc.querySelector('.spec-table > tbody:nth-child(1)');  
+    const rows = tbody?.querySelectorAll('tr'); 
+    let date;
+    let price;
+    rows?.forEach(row => {  
+      const thElements = row.querySelectorAll('th');  
+      thElements.forEach(th => {  
+        if (th.textContent?.trim() === '発売日') {  
+          // 找到包含“発売日”的<th>，选择其后的<td>  
+          const tdElement = th.nextElementSibling;  
+          if (tdElement && tdElement.tagName.toLowerCase() === 'td') {  
+            date = tdElement.textContent?.trim();  
+          }  
+        }  
+      });  
+    });
+    rows?.forEach(row => {  
+      const thElements = row.querySelectorAll('th');  
+      thElements.forEach(th => {  
+        if (th.textContent?.trim() === '価格') {  
+          // 找到包含“価格”的<th>，选择其后的<td>  
+          const tdElement = th.nextElementSibling;  
+          if (tdElement && tdElement.tagName.toLowerCase() === 'td') {  
+            price = resolvePrice(tdElement.textContent?.trim()); 
+          }  
+        }  
+      });  
+    });  
     const items = [...imgs].map(
       (img, i) =>
         <DetailItem>{
