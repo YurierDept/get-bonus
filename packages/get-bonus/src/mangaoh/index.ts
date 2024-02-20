@@ -41,35 +41,21 @@ export class Mangaoh extends Provider {
     const imgs = doc.querySelectorAll('.thickbox > img');
     const descs = doc
       .querySelector('.thickbox:last-of-type')
-      ?.nextElementSibling?.textContent?.split?.('+');
-    const tbody = doc.querySelector('.spec-table > tbody:nth-child(1)');  
-    const rows = tbody?.querySelectorAll('tr'); 
+      ?.nextElementSibling?.textContent?.split('+');
+    const rows = doc.querySelectorAll('.spec-table > tbody > tr');
     let date;
     let price;
-    rows?.forEach(row => {  
-      const thElements = row.querySelectorAll('th');  
-      thElements.forEach(th => {  
-        if (th.textContent?.trim() === '発売日') {  
-          // 找到包含“発売日”的<th>，选择其后的<td>  
-          const tdElement = th.nextElementSibling;  
-          if (tdElement && tdElement.tagName.toLowerCase() === 'td') {  
-            date = tdElement.textContent?.trim();  
-          }  
-        }  
-      });  
+    rows?.forEach((row) => {
+      const th = row.querySelector('th');
+      const td = row.querySelector('td');
+      const title = th?.textContent?.trim();
+      const content = td?.textContent?.trim();
+      if (title === '発売日') {
+        date = content;
+      } else if (title === '価格') {
+        price = resolvePrice(content);
+      }
     });
-    rows?.forEach(row => {  
-      const thElements = row.querySelectorAll('th');  
-      thElements.forEach(th => {  
-        if (th.textContent?.trim() === '価格') {  
-          // 找到包含“価格”的<th>，选择其后的<td>  
-          const tdElement = th.nextElementSibling;  
-          if (tdElement && tdElement.tagName.toLowerCase() === 'td') {  
-            price = resolvePrice(tdElement.textContent?.trim()); 
-          }  
-        }  
-      });  
-    });  
     const items = [...imgs].map(
       (img, i) =>
         <DetailItem>{
