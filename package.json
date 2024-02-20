@@ -18,6 +18,7 @@
     "postversion": "turbo run build"
   },
   "dependencies": {
+    "@formkit/tempo": "^0.0.9",
     "@nuxt/image": "1.2.0",
     "@vueuse/core": "^10.7.2",
     "bgmc": "^0.0.10",

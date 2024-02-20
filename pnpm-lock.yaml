@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@formkit/tempo':
+        specifier: ^0.0.9
+        version: 0.0.9
       '@nuxt/image':
         specifier: 1.2.0
         version: 1.2.0(rollup@3.29.4)
@@ -989,6 +992,10 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  /@formkit/tempo@0.0.9:
+    resolution: {integrity: sha512-7dmPwwKntCfNdTCpQBWh8pBfG96nDdZytd5pS+ma6PNCmpTv8rwe/mDpVLrsuMKiworFn9QGbEQoFCyC8wlWTg==}
+    dev: false
 
   /@iconify-json/logos@1.1.42:
     resolution: {integrity: sha512-/f+frtPm3m3Z30oy8Pk+QqRDkbmAiIaWGPl5CmsCXm15MVfvw9a/V/gD7WzdyuSGAZcFuQaqbHXj92y/n+2ifg==}

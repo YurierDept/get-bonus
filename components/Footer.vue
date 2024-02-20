@@ -3,6 +3,8 @@
 import buildTime from '~build/time';
 import { sha } from '~build/git';
 import { version } from '~build/package';
+
+import { format } from '@formkit/tempo';
 import { Milestone, Clock3, Sparkles } from 'lucide-vue-next';
 </script>
 
@@ -21,7 +23,16 @@ import { Milestone, Clock3, Sparkles } from 'lucide-vue-next';
     </p>
     <p>
       <Clock3 class="inline align-baseline w-3 h-3 mr-1"></Clock3>
-      <span>程序构建于: {{ buildTime }}</span>
+      <span
+        >程序构建于:
+        {{
+          format({
+            date: buildTime,
+            format: 'YYYY-MM-DD HH:mm',
+            tz: 'Asia/Shanghai'
+          })
+        }}</span
+      >
     </p>
     <p>
       <Sparkles class="inline align-baseline w-3 h-3 mr-1"></Sparkles>
