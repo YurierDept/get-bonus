@@ -60,11 +60,8 @@ const resetSearch = () => {
     path: route.path,
     query: { q: '' }
   });
-  updateTitle();
 };
 const search = async (input: string) => {
-  updateTitle();
-
   if (isSearching.value) return;
   if (!input) return;
 
@@ -87,7 +84,6 @@ const search = async (input: string) => {
   } finally {
     abort = null;
     isSearching.value = false;
-    updateTitle();
   }
 };
 
@@ -138,16 +134,13 @@ const random = (arr: string[]) => {
   return result;
 };
 
-const colorMode = useColorMode();
-
-const fixedTitlePart = ' - 百合花船·特典搜索';
-function updateTitle() {
-  let newTitle = route.query.q ? `${route.query.q}${fixedTitlePart}` : '百合花船·特典搜索';
-  if ((route.query.q = '')) {
-    newTitle = '百合花船·特典搜索';
+const FixedTitlePart = '百合花船·特典搜索';
+useHead({
+  title() {
+    const newTitle = route.query.q ? `${route.query.q} - ${FixedTitlePart}` : FixedTitlePart;
+    return newTitle;
   }
-  document.title = newTitle;
-}
+});
 
 // 初始化时从localStorage加载搜索历史
 const initHistory = () => {
@@ -169,7 +162,6 @@ const clearHistory = () => {
 
 onMounted(() => {
   initHistory();
-  updateTitle();
 
   // 监听searchHistory的变化并保存到localStorage
   watchEffect(() => {
