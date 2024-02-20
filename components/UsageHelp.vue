@@ -12,7 +12,7 @@ import { BookCheck, Bug, Compass, Info, PackageOpen } from 'lucide-vue-next';
           <BookCheck class="w-3 h-3"></BookCheck>
         </button>
         使用方法
-        </Badge>
+      </Badge>
       <span class="font-bold">1. 欲查询商品在各商家的商品及特典信息，请输入</span
       ><span>商品（书籍等）的</span><span class="font-bold">原文标题</span
       ><span
@@ -65,8 +65,10 @@ import { BookCheck, Bug, Compass, Info, PackageOpen } from 'lucide-vue-next';
         其他说明与声明
       </Badge>
       <span
-        >所有信息仅供参考。 搜索结果由 Bangumi 番组计划
-        及已支持的商家网站解析而来，<u>未做主观筛选</u>， 请理性看待搜索结果；提示由
+        >所有信息仅供参考。 搜索结果由 Bangumi 番组计划 及已支持的商家网站解析而来，<span
+          class="underline underline-offset-4"
+          >未做主观筛选</span
+        >， 请理性看待搜索结果；提示由
       </span>
       <a
         href="https://github.com/YurierDept/get-bonus/graphs/contributors"
