@@ -11,6 +11,16 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     'unplugin-info/nuxt'
   ],
+  components: [
+    {
+      path: '~/components/common',
+      pathPrefix: false
+    },
+    {
+      path: '~/components/docs',
+      pathPrefix: false
+    }
+  ],
   alias: {
     'get-bonus': fileURLToPath(new URL('./packages/get-bonus/src/index.ts', import.meta.url))
   },
