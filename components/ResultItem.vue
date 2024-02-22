@@ -24,7 +24,7 @@ async function copyUrl() {
       <nuxt-link class="font-bold text-5 hover:color-blue" :to="data.url" target="_blank">
         <span>{{ data.title }}</span>
       </nuxt-link>
-      <Button @click="copyUrl" variant="secondary" size="sm" margin-left="3px" class="ml-3 mt-3">
+      <Button @click="copyUrl" variant="secondary" size="sm" margin-left="3px" class="ml-3">
         <Copy class="w-4 h-4 mr-2"></Copy>复制商家链接
       </Button>
     </span>
