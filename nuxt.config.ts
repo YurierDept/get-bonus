@@ -19,6 +19,10 @@ export default defineNuxtConfig({
     {
       path: '~/components/docs',
       pathPrefix: false
+    },
+    {
+      path: '~/components',
+      pathPrefix: false
     }
   ],
   alias: {
