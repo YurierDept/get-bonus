@@ -241,6 +241,9 @@ onMounted(() => {
             ></span
           >
         </p>
+        <template #fallback>
+          <p class="w-full h-[1.5em]"></p>
+        </template>
       </ClientOnly>
     </div>
     <div class="w-full mt-6 pb-16">
