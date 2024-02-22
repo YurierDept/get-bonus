@@ -3,20 +3,28 @@ import type { Detail } from 'get-bonus';
 
 const props = defineProps<{ details: Record<string, Detail[]> }>();
 
-const detailEntries = computed(() => {
-  return Object.entries(props.details).filter((d) => d[1].length > 0);
-});
+const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Comic Zin`, `漫画王`];
 </script>
 
 <template>
-  <Accordion type="multiple" :default-value="detailEntries.map((d) => d[0])">
-    <AccordionItem v-for="[id, results] in detailEntries" :key="id" :value="id">
-      <AccordionTrigger>{{ id }}</AccordionTrigger>
-      <AccordionContent>
-        <ul class="grid gap-4">
-          <ResultItem v-for="result in results" :key="result.url" :data="result" />
-        </ul>
-      </AccordionContent>
-    </AccordionItem>
-  </Accordion>
+  <Tabs
+    type="multiple"
+    :default-value="platforms.find((id) => details[id] && details[id].length > 0)"
+  >
+    <TabsList>
+      <TabsTrigger v-for="id in platforms" :key="id" :value="id">{{ id }}</TabsTrigger>
+    </TabsList>
+    <TabsContent v-for="id in platforms" :key="id" :value="id">
+      <ul v-if="details[id] && details[id].length > 0" class="grid gap-4">
+        <ResultItem v-for="result in details[id]" :key="result.url" :data="result" />
+      </ul>
+      <div v-else>
+        <Card>
+          <CardContent class="p-6">
+            <p>未找到结果</p>
+          </CardContent>
+        </Card>
+      </div>
+    </TabsContent>
+  </Tabs>
 </template>
