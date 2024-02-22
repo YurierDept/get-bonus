@@ -15,7 +15,7 @@ const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Comic Zin`, `漫画王`];
       <TabsTrigger v-for="id in platforms" :key="id" :value="id">{{ id }}</TabsTrigger>
     </TabsList>
     <TabsContent v-for="id in platforms" :key="id" :value="id">
-      <ul v-if="details[id] && details[id].length > 0" class="grid gap-4">
+      <ul v-if="details[id] && details[id].length > 0" class="grid gap-4 w-full">
         <ResultItem v-for="result in details[id]" :key="result.url" :data="result" />
       </ul>
       <div v-else>
