@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
+import { AlertCircle } from 'lucide-vue-next';
 
 const props = defineProps<{ details: Record<string, Detail[]> }>();
 
@@ -12,7 +13,11 @@ const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Gamers`, `Comic Zin`, `�
     :default-value="platforms.find((id) => details[id] && details[id].length > 0)"
   >
     <TabsList>
-      <TabsTrigger v-for="id in platforms" :key="id" :value="id">{{ id }}</TabsTrigger>
+      <TabsTrigger v-for="id in platforms" :key="id" :value="id">
+        {{ id }} 
+        <Badge v-if="details[id] && details[id].length > 0" component="span" variant="outline" class="select-none ml-1">{{ details[id].length }}</Badge>
+        <AlertCircle v-else class="w-4 h-4 ml-1"></AlertCircle>
+      </TabsTrigger>
     </TabsList>
     <TabsContent v-for="id in platforms" :key="id" :value="id">
       <ul v-if="details[id] && details[id].length > 0" class="grid gap-4 w-full">
@@ -21,7 +26,7 @@ const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Gamers`, `Comic Zin`, `�
       <div v-else>
         <Card>
           <CardContent class="p-6">
-            <p>未找到结果</p>
+            <p>在此商家未找到结果。试试再次搜索？</p>
           </CardContent>
         </Card>
       </div>
