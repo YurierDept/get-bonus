@@ -3,7 +3,7 @@ import type { Detail } from 'get-bonus';
 
 const props = defineProps<{ details: Record<string, Detail[]> }>();
 
-const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Comic Zin`, `漫画王`];
+const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Gamers`, `Comic Zin`, `漫画王`];
 </script>
 
 <template>
