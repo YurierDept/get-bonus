@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Detail } from 'get-bonus';
-import { AlertCircle } from 'lucide-vue-next';
+import { AlertCircle, SearchCheck } from 'lucide-vue-next';
 
 const props = defineProps<{ details: Record<string, Detail[]> }>();
 
@@ -15,7 +15,7 @@ const platforms = [`Melonbooks`, `Animate`, `虎穴`, `Gamers`, `Comic Zin`, `�
     <TabsList>
       <TabsTrigger v-for="id in platforms" :key="id" :value="id">
         {{ id }} 
-        <Badge v-if="details[id] && details[id].length > 0" component="span" variant="outline" class="select-none ml-1">{{ details[id].length }}</Badge>
+        <SearchCheck v-if="details[id] && details[id].length > 0" class="w-4 h-4 ml-1"></SearchCheck>
         <AlertCircle v-else class="w-4 h-4 ml-1"></AlertCircle>
       </TabsTrigger>
     </TabsList>
