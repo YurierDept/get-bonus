@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  debug: true,
+  debug: false,
   devtools: { enabled: true },
   modules: [
     '@vueuse/nuxt',
@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/color-mode',
     'shadcn-nuxt',
-    'unplugin-info/nuxt'
+    'unplugin-info/nuxt',
+    'unplugin-analytics/nuxt'
   ],
   components: [
     {
@@ -39,12 +40,7 @@ export default defineNuxtConfig({
       },
       link: [{ rel: 'icon', href: '/favicon.ico' }],
       meta: [],
-      script: [
-        {
-          type: 'text/javascript',
-          children: `(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; y = l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t, y); })(window, document, 'clarity', 'script', 'kw32lgez2o');`
-        }
-      ]
+      script: []
     }
   },
   image: {
@@ -76,6 +72,14 @@ export default defineNuxtConfig({
   info: {
     meta: {
       // ...
+    }
+  },
+  analytics: {
+    clarity: {
+      id: 'kw32lgez2o'
+    },
+    cloudflare: {
+      beacon: '7490b65e395e4cb490fdefbb356a9829'
     }
   }
 });
