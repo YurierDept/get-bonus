@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 import { ofetch } from 'ofetch';
 
 import { Provider } from '../scraper';
-import { removeExtraSpaces } from '../utils';
+import { removeExtraSpaces, retryFn } from '../utils';
 
 export class Gamers extends Provider {
   constructor() {
@@ -17,7 +17,8 @@ export class Gamers extends Provider {
         smt: text,
         spc: 4,
         'nd[]': [5, 6]
-      }
+      },
+      retry: 5
     });
 
     const dom = new JSDOM(html);
@@ -35,46 +36,67 @@ export class Gamers extends Provider {
   }
 
   async detail(url: string): Promise<Detail | undefined> {
-    const html = await ofetch(url);
-    const dom = new JSDOM(html);
-    const doc = dom.window.document;
+    return retryFn(
+      async () => {
+        const resp = await ofetch.raw(url, { retry: 5 });
 
-    const titleElement = doc.querySelector('.ttl_style01');
-    const title = titleElement?.textContent?.trim?.() || '';
+        const html = resp._data! as string;
+        const dom = new JSDOM(html);
+        const doc = dom.window.document;
 
-    const price = resolvePrice(doc.querySelector('.item_detail_price .price')?.textContent?.trim());
-    const date = resolveDate(
-      doc.querySelector('.item_detail_release .release')?.textContent?.trim()
+        const titleElement = doc.querySelector('#item_detail h1');
+        const title = titleElement?.textContent?.trim?.() || '';
+
+        /**
+         * 返回了以下东西, 重试
+         * 
+         * ただいま、大変サイトが混み合っております。
+         * 申し訳ありませんが、しばらく時間を置いて
+         * アクセスしていただけますようお願いいたします。
+         */
+        if (!title) {
+          throw new Error(doc?.body?.textContent ?? 'Unknown');
+        }
+
+        const price = resolvePrice(
+          doc.querySelector('.item_detail_price .price')?.textContent?.trim()
+        );
+        const date = resolveDate(
+          doc.querySelector('.item_detail_release .release')?.textContent?.trim()
+        );
+
+        const tokutens = doc.querySelectorAll('#tokuten > div[class]');
+        const items = [...tokutens].map((item) => {
+          const img = item.querySelector('img') as HTMLImageElement;
+          const info = item.querySelector('.tokuten_name');
+          return <DetailItem>{
+            image: img.src,
+            description: removeExtraSpaces(info?.textContent || '')
+          };
+        });
+
+        const isLimited = title.includes('限定版');
+        if (isLimited == true) {
+          const itemImgMain = doc.querySelector('.item_img_main');
+          const imgZoom = itemImgMain?.querySelector('.img_zoom') as HTMLImageElement;
+          items.unshift({
+            image: imgZoom.src,
+            description: '此为Gamers限定版。商品信息如图所示。'
+          });
+        }
+
+        return {
+          provider: this.id,
+          title,
+          date,
+          price,
+          url,
+          items
+        };
+      },
+      // 重试 5 次, 每次间隔 1 秒
+      { retry: 5, delay: 1000 }
     );
-
-    const tokutens = doc.querySelectorAll('#tokuten > div[class]');
-    const items = [...tokutens].map((item) => {
-      const img = item.querySelector('img') as HTMLImageElement;
-      const info = item.querySelector('.tokuten_name');
-      return <DetailItem>{
-        image: img.src,
-        description: removeExtraSpaces(info?.textContent || '')
-      };
-    });
-
-    const isLimited = title.includes("限定版");
-    if(isLimited == true){
-      const itemImgMain = doc.querySelector('.item_img_main');  
-      const imgZoom = itemImgMain?.querySelector('.img_zoom') as HTMLImageElement;
-      items.unshift({ 
-        image: imgZoom.src,
-        description: '此为Gamers限定版。商品信息如图所示。' 
-      });
-    }
-
-    return {
-      provider: this.id,
-      title,
-      date,
-      price,
-      url,
-      items
-    };
   }
 }
 
