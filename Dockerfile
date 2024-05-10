@@ -8,6 +8,6 @@ WORKDIR /get-bonus
 
 COPY . .
 
-RUN npm i -g pnpm && pnpm install && pnpm build
+RUN npm i -g pnpm@8.15.4 && pnpm install && pnpm build
 
 CMD node .output/server/index.mjs
